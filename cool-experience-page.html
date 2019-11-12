@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Jean's cool experience page</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet"> 
+	<style>
+		/*css reset*/
+
+		/* http://meyerweb.com/eric/tools/css/reset/
+		   v2.0 | 20110126
+		   License: none (public domain)
+		*/
+
+		html, body, div, span, applet, object, iframe,
+		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+		a, abbr, acronym, address, big, cite, code,
+		del, dfn, em, img, ins, kbd, q, s, samp,
+		small, strike, strong, sub, sup, tt, var,
+		b, u, i, center,
+		dl, dt, dd, ol, ul, li,
+		fieldset, form, label, legend,
+		table, caption, tbody, tfoot, thead, tr, th, td,
+		article, aside, canvas, details, embed,
+		figure, figcaption, footer, header, hgroup,
+		menu, nav, output, ruby, section, summary,
+		time, mark, audio, video {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 100%;
+			font: inherit;
+			vertical-align: baseline;
+		}
+		/* HTML5 display-role reset for older browsers */
+		article, aside, details, figcaption, figure,
+		footer, header, hgroup, menu, nav, section {
+			display: block;
+		}
+		body {
+			line-height: 1;
+		}
+		ol, ul {
+			list-style: none;
+		}
+		blockquote, q {
+			quotes: none;
+		}
+		blockquote:before, blockquote:after,
+		q:before, q:after {
+			content: '';
+			content: none;
+		}
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+
+		/*css reset*/
+
+		body{
+			font-family: 'Inconsolata', monospace;
+			background-color: black;
+		}
+
+		.cmd{
+			padding-top: 1px;
+			padding-bottom: 3px;
+			color: white;
+			background-color: black;
+			font-size: 20px;
+			text-align: left;
+		}
+
+		.title{
+			padding-bottom: 10px;
+		}
+
+		#green{
+			color: green;
+		}
+
+		#clickable{
+			color: #f90;
+			cursor: pointer;
+
+		}
+
+		#blue{
+			color: #0bf;
+		}
+
+		#red{
+			color: #f22;
+		}
+		a:link{
+			color: #f90;
+			text-decoration: none;
+		}
+
+		a:visited{
+			color: #f90;
+		}
+
+
+	</style>
+</head>
+
+<body>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    
+    <script id="Block-Education" type="text/html">
+	   	<!-- Block-Education -->
+		<p><span id="green">jcsf@experiences</span>:<span id="blue">~</span>$ cd education/</p>
+		<p><span id="green">jcsf@experiences</span>:<span id="blue">~/education</span>$ ls -l</p>
+		<p>Total 3</p>
+		<p>dr--r--r-- 4 jcsf - Nov 2019 <span id="clickable" onclick="Menu()">Go back</span></p>
+		<p>-r-xr--r-- 1 jcsf - Feb 2018 > Jul 2021 <a href="http://bcc.ufpr.br/">Universidade Federal do Paraná (Computer Science)</a></p>
+		<p>-r-xr--r-- 1 jcsf - Feb 2016 > Nov 2017 <a href="https://www.tuiuti.edu.br/vestibular/ciencia-da-computacao">Universidade Tuiuti do Paraná (Computer Science)</a></p>
+	</script>
+
+	<script id="Block-Languages" type="text/html">
+		<!-- Languages -->
+		<p><span id="green">jcsf@experiences</span>:<span id="blue">~</span>$ cd languages/</p>
+		<p><span id="green">jcsf@experiences</span>:<span id="blue">~</span>$ ls -l</p>
+		<p>Total 3</p>
+		<p>dr--r--r-- 4 jcsf - Nov 2019 <span id="clickable" onclick="Menu()">Go back</span></p>
+		<p>-rwxrwx--- jcsf TOEFL_ITP 590 Oct 2019 <span id="red">English (Advanced)</span></p>
+		<p>-rwxrwxrwx jcsf native 1 Jul 2019 <span id="red">Portuguese (Native language)</span></p>
+	</script>
+
+    <script id="Block-Professional" type="text/html">
+		<!-- Professional experience -->
+		<p><span id="green">jcsf@experiences</span>:<span id="blue">~</span>$ cd professional/</p>
+		<p><span id="green">jcsf@experiences</span>:<span id="blue">~/professional</span>$ ls -l</p>
+		<p>Total 7</p>
+		<p>dr--r--r-- 4 jcsf - Nov 2019 <span id="clickable" onclick="Menu()">Go back</span></p>
+		<p>-r-xr--r-- 1 jcsf - Jul 2018 > Jul 2019 <a href="index.html">This-Website.html</a></p>
+		<p>-r--r--r-- 1 jcsf - <span id="blue">My work on</span> <span id="clickable" onclick="DescriptionWeb()">This-Website.txt</span></p>
+		<p>-r-xr--r-- 1 jcsf - Set 2018 > Fev 2019 <a href="https://ecomp.co/">ECOMP Webpage</a></p>
+		<p>-r--r--r-- 1 jcsf - <span id="blue">My work at</span> <span id="clickable" onclick="DescriptionEcomp()">ECOMP.txt</span></p>
+		<p>-r-xr--r-- 1 jcsf - May 2017 > Fev 2018 <a href="https://www.cassi.com.br">CASSI Webpage</a></p>
+		<p>-r--r--r-- 1 jcsf - <span id="blue">My work at</span> <span id="clickable" onclick="DescriptionCassi()">CASSI.txt</span></p>
+	</script>
+    
+    <script id="Block-Menu" type="text/html">
+    	<p><span id="green">jcsf@experiences</span>:<span id="blue">~</span>$ cd ..</p>
+    	<p><span id="green">jcsf@experiences</span>:<span id="blue">~</span>$ ls -l</p>
+		<p>Total 4</p>
+		<p>-r--r--r-- 1 jcsf - Feb 2018 <a href="index.html">Back to the main page.html</a></p>
+		<p>dr--r--r-- 3 jcsf - Jul 2021 <span id="clickable" onclick="Education()">gradutaion</span></p>
+		<p>dr--r--r-- 3 jcsf - Oct 2018 <span id="clickable" onclick="Languages()">languages</span></p>
+		<p>dr--r--r-- 7 jcsf - Feb 2019 <span id="clickable" onclick="Professional()">professional</span></p>
+    </script>
+
+    <script id="Block-Web" type="text/html">
+   		<p><span id="green">jcsf@experiences</span>:<span id="blue">~</span>$ vim This-Website</p>
+    </script>
+    
+    <script id="Block-Cassi" type="text/html">
+    	<p><span id="green">jcsf@experiences</span>:<span id="blue">~</span>$ vim CASSI /My /work.txt</p>
+    </script>
+
+    <script id="Block-Ecomp" type="text/html">
+    	<p><span id="green">jcsf@experiences</span>:<span id="blue">~</span>$ vim ECOMP /My /work.txt</p>
+
+    </script>
+
+    <script id="Block-Vim" type="text/html">
+    	<p><span id="clickable" onclick="Professional()">Go back</span></p>
+    	<p><span id="blue">~</span></p>
+    	<p><span id="blue">~</span></p>
+    	<p><span id="blue">~</span></p>
+    	<p><span id="blue">~</span></p>
+    	<p><span id="blue">~</span></p>
+    	<p><span id="blue">~</span></p>
+    	<p><span id="blue">~</span></p>
+    	<p><span id="blue">~</span></p>
+    	<p><span id="blue">~</span></p>
+    	<p><span id="blue">~</span></p>
+    </script>
+
+    <script>
+
+    	function Education(){
+    		document.getElementById("insertion").innerHTML = document.getElementById('Block-Education').innerHTML;
+    	}
+    	
+    	function Languages(){
+    		document.getElementById("insertion").innerHTML = document.getElementById('Block-Languages').innerHTML;
+    	}
+
+    	function Professional(){
+    		document.getElementById("insertion").innerHTML = document.getElementById('Block-Professional').innerHTML;
+    	}
+
+    	function Menu(){
+    		document.getElementById("insertion").innerHTML = document.getElementById('Block-Menu').innerHTML;
+    	}
+
+    	function DescriptionCassi(){
+    		document.getElementById("insertion").innerHTML = document.getElementById('Block-Cassi').innerHTML + document.getElementById('Block-Vim').innerHTML;
+    	}
+
+    	function DescriptionEcomp(){
+    		document.getElementById("insertion").innerHTML = document.getElementById('Block-Ecomp').innerHTML + document.getElementById('Block-Vim').innerHTML;
+    	}
+
+    	function DescriptionWeb(){
+    		document.getElementById("insertion").innerHTML = document.getElementById('Block-Web').innerHTML + document.getElementById('Block-Vim').innerHTML;
+    	}
+
+    </script>
+	<div class="cmd">
+		<div class="title">
+			jcsf@experiences: ~
+
+			<p><br>-----Tip: If it's orange, you can click it!-----</p><br>
+		</div>
+		
+		
+		<div class="insertion" id="insertion">
+			<!-- first ls -->
+			<p><span id="green">jcsf@experiences</span>:<span id="blue">~</span>$ ls -l</p>
+			<p>Total 4</p>
+			<p>-r--r--r-- 1 jcsf - Feb 2018 <a href="index.html">Back to the main page.html</a></p>
+			<p>dr--r--r-- 3 jcsf - Jul 2021 <span id="clickable" onclick="Education()">gradutaion</span></p>
+			<p>dr--r--r-- 3 jcsf - Oct 2018 <span id="clickable" onclick="Languages()">languages</span></p>
+			<p>dr--r--r-- 7 jcsf - Feb 2019 <span id="clickable" onclick="Professional()">professional</span></p>
+		</div>
+	</div>
+</body>
+</html>

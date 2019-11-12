@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Just a placeholder</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet"> 
+	<style>
+		/*css reset*/
+
+		/* http://meyerweb.com/eric/tools/css/reset/
+		   v2.0 | 20110126
+		   License: none (public domain)
+		*/
+
+		html, body, div, span, applet, object, iframe,
+		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+		a, abbr, acronym, address, big, cite, code,
+		del, dfn, em, img, ins, kbd, q, s, samp,
+		small, strike, strong, sub, sup, tt, var,
+		b, u, i, center,
+		dl, dt, dd, ol, ul, li,
+		fieldset, form, label, legend,
+		table, caption, tbody, tfoot, thead, tr, th, td,
+		article, aside, canvas, details, embed,
+		figure, figcaption, footer, header, hgroup,
+		menu, nav, output, ruby, section, summary,
+		time, mark, audio, video {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 100%;
+			font: inherit;
+			vertical-align: baseline;
+		}
+		/* HTML5 display-role reset for older browsers */
+		article, aside, details, figcaption, figure,
+		footer, header, hgroup, menu, nav, section {
+			display: block;
+		}
+		body {
+			line-height: 1;
+		}
+		ol, ul {
+			list-style: none;
+		}
+		blockquote, q {
+			quotes: none;
+		}
+		blockquote:before, blockquote:after,
+		q:before, q:after {
+			content: '';
+			content: none;
+		}
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+
+		/*css reset*/
+
+		body{
+			font-family: 'Inconsolata', monospace;
+			
+		}
+
+		.container-1 {
+			max-width: auto;
+			margin: 0 auto;
+			background: rgb(56, 56, 61);
+			text-align: center;
+			font-size: 24px;
+		}
+
+
+		.navbar{
+			overflow: hidden;
+			background-color: #123;
+			position: fixed;
+			top: 0;
+			width: 100%;
+			z-index: 50
+		}
+
+		.navbar a {
+			font-size: 45px;
+			color: white;
+			float: left;
+			display: block;
+			text-align: center;
+			padding: 14px 16px;
+			text-decoration: none;
+			font-size: 17px;
+		}
+
+		.navbar a:hover {
+			background: #eee;
+			color: black;
+			
+		}
+
+		.bg-index{
+			background-image: url('background1.jpg');
+			background-size: cover;
+			background-attachment: fixed;
+			height: 600px;
+			color: white;
+			position: relative
+		}
+
+		.centered{
+			font-size:50px;
+			position:absolute;
+		    left:50%;
+		    top:50%; 
+		    transform: translate(-50%, -50%);
+		}
+
+		.description{
+			font-size:18px;	
+			margin-top: 10px;
+		}
+
+		.cmd{
+			padding-top: 1px;
+			padding-bottom: 3px;
+			color: white;
+			background-color: black;
+			font-size: 20px;
+			text-align: left;
+		}
+
+		.container-2{
+			background: #222;
+			text-align: center;
+			padding-top: 60px;
+			border: 5px solid #111;
+			color: white;
+		}
+
+		.title{
+			padding-bottom: 10px;
+		}
+
+		#green{
+			color: green;
+		}
+
+		#blue{
+			color: blue;
+		}
+
+		.container-3{
+			background: #111;
+			text-align: center;
+			padding-top: 60px;
+			border: 5px solid #111;
+		}
+
+		.exp-row{
+			padding-top: 60px;
+			padding-bottom: 50px;
+		}
+
+		.exp-column {
+			color: white;
+			float: left;
+			width: 40%;	
+			text-align: center;
+			background: rgba(42, 42, 42, 1);
+			border: 5px solid #555;
+			border-radius: 5px;
+			margin-right: 2.5%;
+			margin-left: 2.5%;
+		}
+
+		.exp-row:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+
+		.left{
+			margin-left: 5%;
+		}
+
+		.right{
+			margin-right: 5%;
+		}
+
+		.exp-title{
+			padding: 10px;
+		}
+
+		h1{
+			color: white;
+			font-weight: bold;
+			font-size: 36px;
+		}
+
+		h2{
+			font-size: 24px;
+			color: white;
+			font-weight: bold;
+		}
+
+		.linux{
+			padding-top: 25px;
+			font-size: 16px;
+		}
+
+		.linux a:link{
+			color: green;
+		}
+
+		.linux a:visited{
+			color: green;
+		}
+
+		.knowledge{
+			background: #222;
+			padding-top: 50px;
+			padding-left: 15%;
+			padding-right: 15%;
+			text-align: center;
+		}
+
+		.k_column{
+			padding-top: 60px;
+		}
+
+		.k_column:after{
+			content: "";
+			display: table;
+			clear: both;
+		}
+
+		.k_row{
+			text-align: left;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			margin-bottom: 5px;
+			color:white;
+			float: left;
+			width: 100%;	
+			display: inline-block;
+			background: #111;
+			border: 2px solid #555;
+			border-radius: 5px;
+		}
+
+		.k_row:after{
+			content: "";
+			display: table;
+			clear: both;
+		}
+
+		.bar{
+			margin-right: 4%;
+			background: gray;
+			height: 10px;
+			width: 10%;
+			display: inline-block;
+			float: right;
+			border: 2px solid #555;
+			border-radius: 5px;
+		}
+
+		.bar_title{
+			margin-top: -2px;
+			margin-right: -4%;
+			height: 10px;
+			width: 10%;
+			display: inline-block;
+			float: right;
+		}
+
+		.bar_fill{
+			background: green;
+			height: 100%;
+			border-radius: 4px;
+		}
+
+		#item{
+			margin-left: 5%;
+		}
+		/*@media(max-width:480px){
+			.text-background{
+				height: 200px;
+			}
+		}*/
+	</style>
+</head>
+
+<body>
+	<div class="navbar">
+		<a class="Nome">JCSF</a><a class="nome" href="index.html">Home Page</a><span style="color:red;">This website is not finished yet!</span><span style="color:yellow;"> You may find a lot of bugs/glitches!</span>
+	</div>
+
+	<div class="container-1">
+		<div class="bg-index">
+			<div class="centered">Jean Carlo<br>Sanchuki F.<br>
+				<p class="description">Programmer, 21 years old, love to solve problems.</p>
+			</div>
+		</div>
+	</div>
+	<div class="container-2">
+		<h1>About me</h1>
+		<p>Lorem ipsum est hac tellus at fusce consectetur pulvinar, conubia netus varius aliquam convallis maecenas venenatis rutrum morbi, cras orci ante elit a per amet. torquent hac aliquam ultricies senectus dictumst molestie volutpat aliquet adipiscing, suscipit fringilla etiam enim nam rhoncus mi imperdiet habitasse sem, ut est pharetra eros egestas eu sociosqu purus. conubia laoreet aliquet iaculis lectus magna ullamcorper augue viverra sed dui vestibulum hendrerit amet, ut aptent cras pellentesque vitae aptent eu euismod lorem ullamcorper cubilia tempor. sed primis auctor ornare etiam cursus urna dictum nisl cubilia, volutpat dolor molestie et posuere per fringilla luctus facilisis, ipsum faucibus phasellus cras interdum euismod praesent scelerisque.</p>
+	</div>
+	<div class="container-3">
+		<h1>Experiences</h1>
+		<div class="linux"><p><a href="cool-experience-page.html"><span style="color:green;">jcsf@experiences:~$</span> Have a look at my cool experience/knowledge page (based on the linux terminal)</a></p>
+		</div>
+		<div class="exp-row">
+			<div class="exp-column left">
+				<div class="exp-title">
+					<h2>Professional</h2>
+				</div>
+				Lorem ipsum est hac tellus at fusce consectetur pulvinar, conubia netus varius aliquam convallis maecenas venenatis rutrum morbi, cras orci ante elit a per amet. torquent hac aliquam ultricies senectus dictumst molestie volutpat aliquet adipiscing, suscipit fringilla etiam enim nam rhoncus mi imperdiet habitasse sem, ut est pharetra eros egestas eu sociosqu purus. conubia laoreet aliquet iaculis lectus magna ullamcorper augue viverra sed dui vestibulum hendrerit amet, ut aptent cras pellentesque vitae aptent eu euismod lorem ullamcorper cubilia tempor. sed primis auctor ornare etiam cursus urna dictum nisl cubilia, volutpat dolor molestie et posuere per fringilla luctus facilisis, ipsum faucibus phasellus cras interdum euismod praesent scelerisque. 
+			</div>
+			<div class="exp-column right">
+				<div class="exp-title">
+					<h2>Education</h2>
+				</div>
+				Lorem ipsum est hac tellus at fusce consectetur pulvinar, conubia netus varius aliquam convallis maecenas venenatis rutrum morbi, cras orci ante elit a per amet. torquent hac aliquam ultricies senectus dictumst molestie volutpat aliquet adipiscing, suscipit fringilla etiam enim nam rhoncus mi imperdiet habitasse sem, ut est pharetra eros egestas eu sociosqu purus. conubia laoreet aliquet iaculis lectus magna ullamcorper augue viverra sed dui vestibulum hendrerit amet, ut aptent cras pellentesque vitae aptent eu euismod lorem ullamcorper cubilia tempor. sed primis auctor ornare etiam cursus urna dictum nisl cubilia, volutpat dolor molestie et posuere per fringilla luctus facilisis, ipsum faucibus phasellus cras interdum euismod praesent scelerisque. 
+			</div>
+		</div>
+	</div> 
+	<div class="knowledge">
+		<h1>Knowledge</h1>
+		<div class="k_column">
+			<div class="k_row">
+				<span id="item">Portuguese</span>
+				<div class="bar">
+					<div class="bar_fill" style="width: 90%;">
+							
+					</div>
+				</div>
+				<div class="bar_title" style="margin-right: -3.4%;">
+					<span>Speaking</span>
+				</div>
+				<div class="bar">
+					<div class="bar_fill" style="width: 90%;">					
+					</div>
+				</div>
+				<div class="bar_title">
+					<span>Reading</span>
+				</div>
+				<div class="bar">
+					<div class="bar_fill" style="width: 90%;">
+					</div>
+				</div>
+				<div class="bar_title">
+					<span>Writing</span>
+				</div>
+			</div>
+			<div class="k_row">
+				<span id="item">English</span>
+				<div class="bar">
+					<div class="bar_fill" style="width: 80%;">
+						
+					</div>
+				</div>
+				<div class="bar_title" style="margin-right: -3.4%;">
+					<span>Speaking</span>
+				</div>
+				<div class="bar">
+					<div class="bar_fill" style="width: 80%;">				
+					</div>
+				</div>
+				<div class="bar_title">
+					<span>Reading</span>
+				</div>
+				<div class="bar">
+					<div class="bar_fill" style="width: 70%;">
+						
+					</div>
+				</div>
+				<div class="bar_title">
+					<span>Writing</span>
+				</div>
+			</div>
+		</div>
+		<div class="k_column">
+			<div class="k_row">
+				<span id="item">C++</span>
+			</div>
+			<div class="k_row">
+				<span id="item">C</span>
+			</div>
+			<div class="k_row">
+				<span id="item">Java</span>
+			</div>
+			<div class="k_row">
+				<span id="item">HTML</span>
+			</div>
+			<div class="k_row">
+				<span id="item">CSS</span>
+			</div>
+			<div class="k_row">
+				<span id="item">Java</span>
+			</div>
+			<div class="k_row">
+				<span id="item">Assembly</span>
+			</div>
+			<div class="k_row">
+				<span id="item">Arduino</span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
