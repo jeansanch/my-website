@@ -77,7 +77,6 @@ body{
 }
 
 .navbar a {
-	font-size: 45px;
 	color: white;
 	float: left;
 	display: block;
@@ -329,9 +328,12 @@ h2{
 	overflow: hidden;
 }
 @media(max-width:1024px){
-	@media(max-width:1024px){
 	.navbar{
 		height: 8%;
+	}
+
+	.navbar span{
+		font-size: 50px;
 	}
 
 	.container-1{
@@ -362,5 +364,4 @@ h2{
 	.k_rowse span{
 		font-size: 40px;
 	}
-}
 }
