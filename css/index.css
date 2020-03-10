@@ -324,8 +324,43 @@ h2{
 	text-align: center;
 	padding-bottom:4px;
 }
+
+.block{
+	overflow: hidden;
+}
 @media(max-width:1024px){
-	.bar_title{
+	@media(max-width:1024px){
+	.navbar{
+		height: 8%;
+	}
+
+	.container-1{
+		padding-top: 10%;
+	}
+
+	.centered {
+    	font-size: 80px;
+	}
+
+	.description{
+		font-size: 30px;
+	}
+	
+	.linux{
+		font-size: 15px;
+	}
+
+	.block{
+		font-size: 15px;
+	}
+
+	.k_rowse{
+		width: 25%;
 		
 	}
+
+	.k_rowse span{
+		font-size: 40px;
+	}
+}
 }

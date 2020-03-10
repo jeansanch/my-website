@@ -1,0 +1,84 @@
+CI1055	Algoritmos e Estruturas de Dados 1 
+CI1068	Circuitos Digitais
+CI1003	Introdução à Ciência da Computação
+CI1056	Algoritmos e Estruturas de Dados 2
+CI1210	Projetos Digitais e Microprocessadores
+CI1001	Programação 1
+CI1057	Algoritmos e Estruturas de Dados 3
+CI1212	Arquitetura de Computadores
+CI1002	Programação 2
+CI1237	Matemática Discreta
+CI1059	Introdução à Teoria da Computação
+CI1350	Interação Humano-Computador
+CI1165	Análise de Algoritmos
+CI1164	Introdução à Computação Científica
+CI1062	Paradigmas de Programação
+CI1064	Software Básico
+CI1065	Algoritmos e Teoria dos Grafos
+CI1058	Redes de Computadores 1
+CI1238	Otimização
+CI1162	Engenharia de Requisitos
+CI1215	Sistemas Operacionais
+CI1209	Inteligência Artificial
+CI1218	Bancos de Dados
+CI1163	Design de Software
+CI1316	Programação Paralela
+CI1061	Redes de Computadores 2
+CI1100	Estágio Supervisionado
+CI1221	Engenharia de Software
+CI1007	Segurança Computacional
+CI1211	Construção de Compiladores
+CI1005	Qualidade de Software
+CE009	Introdução à Estatística
+CMA111	Cálculo 1A
+CM304	Complementos de Matemática
+CMA211	Cálculo 2A
+CM303	Introdução à Geometria Analítica e Álgebra Linear
+
+CI1008	Introdução a Sistemas Embarcados 	
+CI1009	Computação Paralela com GPUs 	
+CI1010	Programação WEB 	
+CI1011	Reconhecimento de Padrões 	
+CI1012	Algoritmos Aleatorizados 	
+CI1013	Grandes Ideias da Computação Teórica 	
+CI1014	Redes Sociais e Econômicas 	
+CI1015	Teste de Software 	
+CI1016	Técnicas em Modelagem de Aplicações 	
+CI1017	Criptografia 	
+CI1020	Robótica Móvel 	
+CI1021	Programação de Dispositivos Móveis 	
+CI1022	Projeto de Sistemas Digitais 	
+CI1023	Projeto de Sistemas Embarcados 	
+CI1025	Dispositivos Reprogramáveis 	
+CI1026	Visão Computacional e Percepção 	
+CI1028	Biometria e Vigilância por Visão Computacional 	
+CI1084	Tópicos em Teoria dos Grafos 	
+CI1086	Arquiteturas de Alto Desempenho 	
+CI1087	Tópicos em Banco de Dados 	
+CI1088	Sistemas Distribuídos 	
+CI1090	Tópicos em Engenharia de Software 	
+CI1091	Avaliação de Desempenho 	
+CI1170	Tópicos em Computação Bioinspirada 	
+CI1171	Aprendizado de Máquina 	
+CI1173	Computação Gráfica 	
+CI1175	Oficina de Computação de Imagens 	
+CI1176	Tópicos em Visão Computacional 	
+CI1177	Tópicos em Computação Gráfica 	
+CI1204	Inovação Tecnológica e Gestão de Projetos 	
+CI1205	Administração de Produção para Informática 	
+CI1219	Sistemas Avançados de Banco de Dados 	
+CI1220	Teoria de Sistemas 	
+CI1311	Fundamentos Lógicos da Inteligência Artificial 	
+CI1315	Projeto de Sistemas Operacionais 	
+CI1338	Geometria Computacional 	
+CI1339	Complexidade Computacional 	
+CI1351	Tópicos em Interação Humano-Computador 	
+CI1352	Design de Sistemas Sociotécnicos 	
+CI1353	Prática em Desenvolvimento de Software 	
+CI1355	Tópicos diversos de Projeto e Análise de Algoritmos 	
+CI1360	Redes Móveis 	
+CI1365	Tópicos em Redes de Computadores 	
+CI1366	Gerenciamento de Redes de Computadores 	
+CI1367	Tópicos em Simulação de Sistemas Computacionais 	
+CI1394	Processamento de Imagens 	
+CI1397	Sistemas Tutores Inteligentes 
