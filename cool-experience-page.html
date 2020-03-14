@@ -35,7 +35,7 @@
 		<!-- Professional experience -->
 		<p>Total 7</p>
 		<p>dr--r--r-- 4 jcsf - Jan 2077 <span id="clickable" onclick="Menu()">Go back</span></p>
-		<p>-r-xr--r-- 1 jcsf - Jul 2018 > Jul 2019 <a href="index.html">This-Website.html</a></p>
+		<p>-r-xr--r-- 1 jcsf - Feb 2019 > Mar 2020 <a href="index.html">This-Website.html</a></p>
 		<p>-r--r--r-- 1 jcsf - <span id="blue">My work on</span> <span id="clickable" onclick="DescriptionWeb()">This-Website.txt</span></p>
 		<p>-r-xr--r-- 1 jcsf - Set 2018 > Fev 2019 <a href="https://ecomp.co/">ECOMP Webpage</a></p>
 		<p>-r--r--r-- 1 jcsf - <span id="blue">My work at</span> <span id="clickable" onclick="DescriptionEcomp()">ECOMP.txt</span></p>
@@ -53,19 +53,27 @@
 
     <script id="Block-Web" type="text/html">
    		<p><span id="green">jcsf@experiences</span>:<span id="blue">~</span>$ vim This-Website</p>
+   		<p><span id="clickable" onclick="vimLeaving()">Go back</span></p>
+   			At my college, every student receives a domain, so I was thinking why can't I make my own website?<br><br>
+   		After some time working at ECOMP, this idea became more and more a possible project. So I've started working on it.<br><br>
+   			It was a bit hard because I've had close to no knowledge on JS and little knowledge on CSS and HTML, some problems took hours to fix, I've started it at early 2019, stopped working on it for some time because of college, but here it is, finished and with some cool features.<br><br>
+   			I'm not a web developer and sincerely don't want to be, but I've made this website with pure passion, because I wanted to have something mine, to show my friends, family and so on...<br><br>
+   			I've really enjoied this project and I plan on adding new features and making it better in the future.
     </script>
     
     <script id="Block-Cassi" type="text/html">
     	<p><span id="green">jcsf@experiences</span>:<span id="blue">~</span>$ vim CASSI /My /work.txt</p>
+    	<p><span id="clickable" onclick="vimLeaving()">Go back</span></p>
     </script>
 
     <script id="Block-Ecomp" type="text/html">
     	<p><span id="green">jcsf@experiences</span>:<span id="blue">~</span>$ vim ECOMP /My /work.txt</p>
-
+		<p><span id="clickable" onclick="vimLeaving()">Go back</span></p>
     </script>
 
     <script id="Block-Vim" type="text/html">
-    	<p><span id="clickable" onclick="Professional()">Go back</span></p>
+    	<p><span id="blue">~</span></p>
+    	<p><span id="blue">~</span></p>
     	<p><span id="blue">~</span></p>
     	<p><span id="blue">~</span></p>
     	<p><span id="blue">~</span></p>
@@ -85,6 +93,7 @@
     	var txtCDProf = ' cd professional';
     	var txtCDLang = ' cd languages';
     	var txtCDGrad = ' cd graduation';
+    	var txtVim = ' :q';
     	var who = 'none';
 
     	function setWho(w){
@@ -225,6 +234,28 @@
 			}
     	}
 
+    	//----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    	function vimLeaving(){
+    		setWho('professional');
+    		document.getElementById("insertion").innerHTML += '<span id="green">jcsf@experiences</span>:<span id="blue">~</span>$';
+    		setTimeout(vimLoop, update)
+    	}
+
+    	function vimLoop(){
+    		if(i < txtVim.length){
+				document.getElementById("insertion").innerHTML += txtVim.charAt(i);
+				i++;
+				setTimeout(vimLoop, update);
+			}
+			else{
+				console.log('else');
+				document.getElementById("insertion").innerHTML = '<span id="green">jcsf@experiences</span>:<span id="blue">~/'+who+'</span>$';
+				i = 0;
+				setTimeout(ProfLoop2, update);
+			}
+    	}
+
 		//----------------------------------------------------------------------------------------------------------------------------------------------------
 
     	function DescriptionCassi(){
@@ -238,7 +269,6 @@
     	function DescriptionWeb(){
     		document.getElementById("insertion").innerHTML = document.getElementById('Block-Web').innerHTML + document.getElementById('Block-Vim').innerHTML;
     	}
-
     </script>
 
 	<div class="cmd">
@@ -258,7 +288,7 @@
 <script>
 	var i = 0;
 	var update = 75;
-	var block = '<p>Total 4</p>' + '<p>-r--r--r-- 1 jcsf - Feb 2018 <a href="index.html">Back to the main page.html</a></p>' + '<p>dr--r--r-- 3 jcsf - Jul 2021 <span id="clickable" onclick="Graduation()">gradutaion</span></p>' + '<p>dr--r--r-- 3 jcsf - Oct 2018 <span id="clickable" onclick="Languages()">languages</span></p>' + '<p>dr--r--r-- 7 jcsf - Feb 2019 <span id="clickable" onclick="Professional()">professional</span></p>' ;
+	var block = '<p>Total 4</p>' + '<p>-r--r--r-- 1 jcsf - Feb 2018 <a href="index.html">back to the main page.html</a></p>' + '<p>dr--r--r-- 3 jcsf - Jul 2021 <span id="clickable" onclick="Graduation()">gradutaion</span></p>' + '<p>dr--r--r-- 3 jcsf - Oct 2018 <span id="clickable" onclick="Languages()">languages</span></p>' + '<p>dr--r--r-- 7 jcsf - Feb 2019 <span id="clickable" onclick="Professional()">professional</span></p>' ;
 	var txt = ' ls -l'; 
 	typingMenu1();
 	function typingMenu1(){
