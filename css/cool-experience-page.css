@@ -95,3 +95,10 @@ a:visited{
 	color: #f90;
 }
 
+@media(max-width:1024px){
+
+	.cmd:after{
+		font-size: 20px;
+	}
+
+}
