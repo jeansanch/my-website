@@ -74,7 +74,7 @@ nav{
 }
 
 nav ul{
-	float: right;
+	float: left;
 	margin-right: 20px;
 }
 
@@ -187,10 +187,6 @@ nav label, input{
 
 .left{
 	margin-left: 5%;
-}
-
-.right{
-	margin-right: 5%;
 }
 
 .exp-title{
@@ -370,6 +366,10 @@ h2{
 	padding: 0;
 }
 
+#first{
+	margin-left: 30px;
+}
+
 @media(max-width:858px){
   	
   	ul{
@@ -412,11 +412,11 @@ h2{
 	}
 
 	.centered {
-    	font-size: 80px;
+    	font-size: 60px;
 	}
 
 	.description{
-		font-size: 30px;
+		font-size: 25px;
 	}
 	
 	.linux{
@@ -431,17 +431,24 @@ h2{
 	.block{
 		font-size: 15px;
 	}
+	
 	.bar_title{
 		padding-left: 0px;
+		font-size: 14px;
 	}
 
-	.k_rowse{
-		width: 20%;
-		overflow: hidden;
+	.bar{
+		height: 8px;
+	}
+
+	.k_rowdy{
+		padding: 5px 5px 1px 8px;	
 	}
 
 	.k_rowse span{
-		font-size: 32px;
+		font-size: 22px;
+		padding-right: 5px;
+		padding-left: 5px;
 	}
 
 	.hamb{
@@ -451,5 +458,8 @@ h2{
 		margin: 6px 0;
 	}
 
+	#first{
+		margin-left: 0px;
+	}
 	
 }
