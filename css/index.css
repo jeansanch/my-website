@@ -103,7 +103,7 @@ nav label, input{
 	display: inline-block;
 	float: right;
 	padding-right: 40px;
-	padding-top: 20px;
+	padding-top: 22px;
 
 }
 
@@ -182,31 +182,33 @@ nav label, input{
 	padding-top: 60px;
 }
 
-.exp-title{
+.exp_title{
 	padding: 10px;
 }
 
-.exp-left{
+.exp_left{
 	margin-right: 56%;
 }
 
-.exp-right{
+.exp_right{
 	margin-left: 56%;
 	margin-top: -46px;
 }
 
-.exp-text{
+.exp_text{
 	color: white;
 	position: absolute;
-	width: 44vw;
+	width: 35vw;
 }
 
 .left{
 		left: 0;
+		padding-left: 4vw;
 }
 
 .right{
 		right: 0;
+		padding-right: 4vw;
 }
 
 h1{
@@ -246,7 +248,8 @@ h2{
 }
 
 .k_column{
-	padding-top: 60px;
+	padding-top: 50px;
+	padding-bottom: 60px;
 }
 
 .k_column:after{
@@ -255,6 +258,9 @@ h2{
 	clear: both;
 }
 
+.k_column h1{
+	padding-bottom: 40px;
+}
 .k_row{
 	text-align: left;
 	padding-top: 10px;
@@ -321,7 +327,7 @@ h2{
 	font-size: 20px;
 }
 
-.exp-block{
+.exp_block{
 	color: #ddd;
 	margin-top: 5px;
 	margin-bottom: 30px;
@@ -436,7 +442,7 @@ h2{
 
 	.knowledge{
 		padding-left: 1%;
-		padding-right: 1%;
+		padding-right: 1.6%;
 	}
 
 	.block{
@@ -476,10 +482,25 @@ h2{
 }
 
 @media(max-width:670px){
-	.exp-text{
-		font-size: 14px;
+	.spbar{
+		margin-left: 2px;
 	}
 
+	.exp_text{
+		font-size: 14px;
+		width: 40vw;
+	}
+
+	.left{
+		padding-left: 3vw;
+	}
+
+	.right{
+		padding-right: 3vw;
+	}
+	.k_rowdy{
+		padding: 5px 0px 1px 1px;
+	}
 	#left{
 		left: -15px;
 	}
