@@ -61,7 +61,6 @@ body{
 	padding-bottom: 3px;
 	color: white;
 	background-color: black;
-	font-size: 20px;
 	text-align: left;
 }
 
@@ -76,7 +75,6 @@ body{
 #clickable{
 	color: #f90;
 	cursor: pointer;
-
 }
 
 #blue{
@@ -93,12 +91,4 @@ a:link{
 
 a:visited{
 	color: #f90;
-}
-
-@media(max-width:1024px){
-
-	.cmd:after{
-		font-size: 20px;
-	}
-
 }

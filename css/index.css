@@ -374,10 +374,6 @@ h2{
 	padding-bottom:4px;
 }
 
-.block{
-	overflow: hidden;
-}
-
 .link{
 	font-size: 16px;
 	color: green;
@@ -445,6 +441,11 @@ h2{
 		padding-right: 1.6%;
 	}
 
+	.program{
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
 	.block{
 		font-size: 15px;
 	}
@@ -477,6 +478,10 @@ h2{
 
 	#first{
 		margin-left: 0px;
+	}
+
+	.bottom{
+		grid-template-columns: 40% 60%;
 	}
 
 }
