@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Jean's website</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width = device-width, initial-scale = 1.0">
+	<link rel="stylesheet" href="css/sudoku-solver.css">
+		<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+</head>
+
+<script type="text/javascript">
+var table = [];
+
+function readTable(){
+  for(var i = 0; i < 81; i++){
+    (document.getElementById('cell'+i).value != 0) ? table.push(parseInt(document.getElementById('cell'+i).value)) : table.push(0);
+  }
+}
+
+function remove(arr, value){
+		for(var i = 0; i < arr.length; i++){
+			if(arr[i]==value){
+				arr.splice(i, 1);
+			}
+		}
+		return arr;
+}
+
+function compare(pos){
+  numbers = [];
+  free = [1,2,3,4,5,6,7,8,9];
+  offset = parseInt(pos % 9);
+  line = parseInt(pos/9);
+	console.log("PRE FREE: "+free);
+  for(var i = 0; i < 9; i++){
+    // column
+    if(table[i*9 + offset] != 0){
+      if (numbers.indexOf([i*9+offset]) === -1)
+        numbers.push(table[i*9+offset]);
+    }
+		//rows
+    if(table[line*9+i] != 0){
+      if (numbers.indexOf(table[line*9+i]) === -1)
+        numbers.push(table[line*9+i]);
+    }
+		//squares
+    if(table[(parseInt(offset/3)*3) + (parseInt(line/3)*27) + (parseInt(i/3)*9) + (i % 3)] != 0){
+      if (numbers.indexOf((parseInt(offset/3)*3) + (parseInt(line/3)*27) + (parseInt(i/3)*9) + (i % 3)) === -1)
+        numbers.push(table[(parseInt(offset/3)*3) + (parseInt(line/3)*27) + (parseInt(i/3)*9) + (i % 3)]);
+    }
+  }
+	console.log("NUMBERS: "+numbers+"POS: "+pos);
+  for(i = 0; i < numbers.length; i++){
+    try{
+      free = remove(free, numbers[i]);
+    }
+    catch{
+
+    }
+  }
+	console.log("POS FREE:"+free);
+  if (free.length == 1){
+    write(pos, free[0]);
+    return 1;
+  }
+  return 0;
+}
+
+function printTable(){
+	for(var i = 0; i < 81; i++){
+    document.getElementById('cell'+i).value = table[i];
+  }
+  console.log(table);
+}
+
+function write(pos, value){
+  table[pos] = value;
+}
+
+function solve(){
+  table = [];
+  readTable();
+  var done = false;
+  changed = true;
+  while(done == false && changed == true){
+    changed = false;
+    done = true;
+    for(var i = 0; i < table.length; i++){
+      if (table[i] == 0){
+        done = false;
+        if (compare(i) == 1){
+          changed = true;
+        }
+      }
+    }
+  }
+  printTable();
+}
+</script>
+
+<body>
+	This is just a prototype, it can solve simple sudokus, but can't solve sudokus where
+	you don't have a single answer for a cell, I'll be implementing this in the future
+<table id="grid">
+  <tr>
+    <td class="cell"><input type="text" id="cell0" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell1" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell2" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell3" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell4" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell5" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell6" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell7" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell8" maxlength="1"></td>
+  </tr>
+  <tr>
+    <td class="cell"><input type="text"  id="cell9" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell10" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell11" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell12" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell13" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell14" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell15" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell16" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell17" maxlength="1"></td>
+  </tr>
+  <tr>
+    <td class="cell"><input type="text" id="cell18" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell19" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell20" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell21" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell22" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell23" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell24" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell25" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell26" maxlength="1"></td>
+  </tr>
+  <tr>
+    <td class="cell"><input type="text" id="cell27" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell28" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell29" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell30" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell31" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell32" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell33" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell34" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell35" maxlength="1"></td>
+  </tr>
+  <tr>
+    <td class="cell"><input type="text" id="cell36" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell37" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell38" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell39" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell40" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell41" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell42" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell43" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell44" maxlength="1"></td>
+  </tr>
+  <tr>
+    <td class="cell"><input type="text" id="cell45" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell46" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell47" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell48" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell49" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell50" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell51" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell52" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell53" maxlength="1"></td>
+  </tr>
+  <tr>
+    <td class="cell"><input type="text" id="cell54" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell55" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell56" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell57" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell58" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell59" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell60" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell61" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell62" maxlength="1"></td>
+  </tr>
+  <tr>
+    <td class="cell"><input type="text" id="cell63" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell64" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell65" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell66" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell67" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell68" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell69" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell70" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell71" maxlength="1"></td>
+  </tr>
+  <tr>
+    <td class="cell"><input type="text" id="cell72" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell73" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell74" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell75" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell76" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell77" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell78" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell79" maxlength="1"></td>
+    <td class="cell"><input type="text" id="cell80" maxlength="1"></td>
+  </tr>
+</table>
+<input type="button" value="Solve!" onclick="solve()">
+</body>
+</html>
