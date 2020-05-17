@@ -70,7 +70,8 @@ function compare(pos){
 
 function printTable(){
 	for(var i = 0; i < 81; i++){
-    document.getElementById('cell'+i).value = table[i];
+		if(table[i] != 0)
+    	document.getElementById('cell'+i).value = table[i];
   }
   console.log(table);
 }
@@ -98,6 +99,14 @@ function solve(){
   }
   printTable();
 }
+
+function clearTable(){
+	console.log("Running CLEAR");
+	for(var i = 0; i < 81; i++){
+  	document.getElementById('cell'+i).value = '';
+  }
+}
+
 </script>
 
 <body>
@@ -204,6 +213,7 @@ function solve(){
     <td class="cell"><input type="text" id="cell80" maxlength="1"></td>
   </tr>
 </table>
-<input type="button" value="Solve!" onclick="solve()">
+<input type="button" value="SOLVE!" onclick="solve()"/>
+<input type="button" value="CLEAR" onclick="clearTable()"/>
 </body>
 </html>
