@@ -225,4 +225,8 @@ p{
 		padding-left: 25px;
 		padding-right: 25px;
 	}
+	
+	.bottom{
+		grid-template-columns: 40% 60%;
+	}
 }
