@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Jean's website</title>
+	<title>Sudoku Solver</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width = device-width, initial-scale = 1.0">
 	<link rel="stylesheet" href="css/sudoku-solver.css">
@@ -11,7 +11,8 @@
 </head>
 
 <script type="text/javascript">
-var table = [];
+var table = new Array(81).fill(0);
+var visualization = true
 
 function readTable(){
   for(var i = 0; i < 81; i++){
@@ -28,29 +29,94 @@ function remove(arr, value){
 		return arr;
 }
 
+function test(){
+	table.fill(0);
+	table[2] = 4;
+	table[3] = 5;
+	table[4] = 6;
+	table[8] = 3;
+	table[9] = 6;
+	table[13] = 9;
+	table[15] = 4;
+	table[16] = 8;
+	table[20] = 5;
+	table[22] = 2;
+	table[25] = 7;
+	table[31] = 3;
+	table[32] = 9;
+	table[37] = 4;
+	table[39] = 7;
+	table[41] = 8;
+	table[42] = 3;
+	table[43] = 6;
+	table[45] = 9;
+	table[48] = 2;
+	table[49] = 1;
+	table[50] = 6;
+	table[54] = 1;
+	table[55] = 7;
+	table[56] = 9;
+	table[65] = 2;
+	table[66] = 3;
+	table[69] = 8;
+	table[74] = 8;
+	table[75] = 9;
+	table[78] = 6;
+	table[79] = 2;
+	table[80] = 7;
+	printTable();
+}
+
+function whiteOut(){
+		for (var i = 0; i<81; i++){
+			document.getElementById("cell"+i).style.background = "white"
+		}
+}
+
+function timer(ms) {
+ return new Promise(res => setTimeout(res, ms));
+}
+
 function compare(pos){
-  numbers = [];
-  free = [1,2,3,4,5,6,7,8,9];
-  offset = parseInt(pos % 9);
-  line = parseInt(pos/9);
+  var numbers = [];
+  var free = [1,2,3,4,5,6,7,8,9];
+  var offset = parseInt(pos % 9);
+  var line = parseInt(pos/9);
 	console.log("PRE FREE: "+free);
-  for(var i = 0; i < 9; i++){
-    // column
+	whiteOut();
+  for(let i = 0; i < 9; i++){
+		// column
+		if(visualization = true){
+			document.getElementById("cell"+pos).style.background = "rgba(10, 200, 10, 0.4)"
+			id = (i*9 + offset);
+			document.getElementById("cell"+id).style.background = "rgba(200, 10, 200, 0.4)"
+		}
+
     if(table[i*9 + offset] != 0){
       if (numbers.indexOf([i*9+offset]) === -1)
         numbers.push(table[i*9+offset]);
     }
 		//rows
+		if(visualization = true){
+			id = line*9+i;
+			document.getElementById("cell"+id).style.background = "rgba(0, 0, 256, 0.4)"
+		}
     if(table[line*9+i] != 0){
       if (numbers.indexOf(table[line*9+i]) === -1)
         numbers.push(table[line*9+i]);
     }
 		//squares
+		if(visualization = true){
+			id = (parseInt(offset/3)*3) + (parseInt(line/3)*27) + (parseInt(i/3)*9) + (i % 3);
+			document.getElementById("cell"+id).style.background = "rgba(0, 200, 200, 0.4)"
+		}
     if(table[(parseInt(offset/3)*3) + (parseInt(line/3)*27) + (parseInt(i/3)*9) + (i % 3)] != 0){
       if (numbers.indexOf((parseInt(offset/3)*3) + (parseInt(line/3)*27) + (parseInt(i/3)*9) + (i % 3)) === -1)
         numbers.push(table[(parseInt(offset/3)*3) + (parseInt(line/3)*27) + (parseInt(i/3)*9) + (i % 3)]);
     }
   }
+
+
 	console.log("NUMBERS: "+numbers+"POS: "+pos);
   for(i = 0; i < numbers.length; i++){
     try{
@@ -80,17 +146,20 @@ function write(pos, value){
   table[pos] = value;
 }
 
-function solve(){
+async function solve(){
   table = [];
   readTable();
-  var done = false;
+
+	var done = false;
   changed = true;
+
   while(done == false && changed == true){
     changed = false;
     done = true;
-    for(var i = 0; i < table.length; i++){
+    for(let i = 0; i < table.length; i++){
       if (table[i] == 0){
         done = false;
+				await timer(0200);
         if (compare(i) == 1){
           changed = true;
         }
@@ -104,6 +173,7 @@ function clearTable(){
 	console.log("Running CLEAR");
 	for(var i = 0; i < 81; i++){
   	document.getElementById('cell'+i).value = '';
+		document.getElementById("cell"+i).style.background = "rgb(255, 255, 255)"
   }
 }
 
@@ -215,5 +285,6 @@ function clearTable(){
 </table>
 <input type="button" value="SOLVE!" onclick="solve()">
 <input type="button" value="CLEAR" onclick="clearTable()">
+<input type="button" value="TEST SUDOKU" onclick="test()">
 </body>
 </html>
