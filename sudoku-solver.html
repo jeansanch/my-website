@@ -12,7 +12,8 @@
 
 <script type="text/javascript">
 var table = new Array(81).fill(0);
-var visualization = true
+var visualization = true;
+var running = false;
 
 function readTable(){
   for(var i = 0; i < 81; i++){
@@ -89,7 +90,9 @@ function compare(pos){
 		if(visualization = true){
 			document.getElementById("cell"+pos).style.background = "rgba(10, 200, 10, 0.4)"
 			id = (i*9 + offset);
-			document.getElementById("cell"+id).style.background = "rgba(200, 10, 200, 0.4)"
+			if (pos != id){
+				document.getElementById("cell"+id).style.background = "rgba(200, 10, 200, 0.4)"
+			}
 		}
 
     if(table[i*9 + offset] != 0){
@@ -99,7 +102,9 @@ function compare(pos){
 		//rows
 		if(visualization = true){
 			id = line*9+i;
-			document.getElementById("cell"+id).style.background = "rgba(0, 0, 256, 0.4)"
+			if (pos != id){
+				document.getElementById("cell"+id).style.background = "rgba(0, 0, 256, 0.4)"
+			}
 		}
     if(table[line*9+i] != 0){
       if (numbers.indexOf(table[line*9+i]) === -1)
@@ -108,7 +113,9 @@ function compare(pos){
 		//squares
 		if(visualization = true){
 			id = (parseInt(offset/3)*3) + (parseInt(line/3)*27) + (parseInt(i/3)*9) + (i % 3);
-			document.getElementById("cell"+id).style.background = "rgba(0, 200, 200, 0.4)"
+			if (pos != id){
+				document.getElementById("cell"+id).style.background = "rgba(0, 200, 200, 0.4)"
+			}
 		}
     if(table[(parseInt(offset/3)*3) + (parseInt(line/3)*27) + (parseInt(i/3)*9) + (i % 3)] != 0){
       if (numbers.indexOf((parseInt(offset/3)*3) + (parseInt(line/3)*27) + (parseInt(i/3)*9) + (i % 3)) === -1)
@@ -148,31 +155,36 @@ function write(pos, value){
 }
 
 async function solve(){
-  table = [];
-  readTable();
+	if (running == false){
+		running = true;
+	  table = [];
+	  readTable();
 
-	var done = false;
-  changed = true;
+		var done = false;
+	  changed = true;
 
-  while(done == false && changed == true){
-    changed = false;
-    done = true;
-    for(let i = 0; i < table.length; i++){
-      if (table[i] == 0){
-        done = false;
-				await timer(0200);
-        if (compare(i) == 1){
-          changed = true;
-        }
-      }
-    }
-  }
-  //printTable();
+	  while(done == false && changed == true){
+	    changed = false;
+	    done = true;
+	    for(let i = 0; i < table.length; i++){
+	      if (table[i] == 0){
+	        done = false;
+					await timer(0200);
+	        if (compare(i) == 1){
+	          changed = true;
+	        }
+	      }
+	    }
+	  }
+	  //printTable();
+		running = false;
+	}
 }
 
 function clearTable(){
 	console.log("Running CLEAR");
 	for(var i = 0; i < 81; i++){
+		table[i] = '';
   	document.getElementById('cell'+i).value = '';
 		document.getElementById("cell"+i).style.background = "rgb(255, 255, 255)"
   }
