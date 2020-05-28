@@ -115,7 +115,7 @@ nav label, nav input{
 }
 
 .title{
-	background: rgb(150,150,150);
+	background: rgb(220,220,220);
 	border-bottom: 5px solid rgb(3, 120, 252);
 	padding-top: 130px;
 	padding-left: 14%;
@@ -142,7 +142,7 @@ p{
 }
 
 .sudoku{
-	background-color: rgb(150,150,150);
+	background-color: rgb(220,220,220);
 	padding-top: 50px;
 	padding-bottom: 250px;
 }
@@ -229,7 +229,7 @@ li{
 	padding-left: 10%;
 	padding-bottom: 100px;
 	padding-top: 50px;
-	background-color: rgb(150,150,150);
+	background-color: rgb(220,220,220);
 	display: grid;
 	grid-template-columns: 50% 50%;
 	grid-template-rows: 80px;
