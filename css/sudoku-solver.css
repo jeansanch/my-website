@@ -58,7 +58,7 @@ body{
 }
 
 nav{
-  background-color: rgba(208,208,208,0.99);
+  background-color: rgba(180,180,180,0.99);
   height: 80px;
   width: 100%;
   position: fixed;
@@ -78,7 +78,7 @@ nav ul li{
 
 nav ul li a{
   text-decoration: none;
-  color: rgba(3, 120, 252);
+  color: rgb(3, 120, 252);
   font-size: 20px;
   padding: 7px 13px;
   border-radius: 3px;
@@ -115,7 +115,8 @@ nav label, nav input{
 }
 
 .title{
-	background: #bababa;
+	background: rgb(150,150,150);
+	border-bottom: 5px solid rgb(3, 120, 252);
 	padding-top: 130px;
 	padding-left: 14%;
 	padding-right: 14%;
@@ -124,7 +125,7 @@ nav label, nav input{
 }
 
 h1{
-	color: black;
+	color: rgb(3, 120, 252);
 	font-weight: bold;
 	font-size: 55px;
 }
@@ -132,23 +133,22 @@ h1{
 p{
 	padding-left: 15px;
 	padding-right: 15px;
-	padding-bottom: 20px;
+	padding-bottom: 40px;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 14px;
 	letter-spacing: 1.5px;
 	color: rgba(3, 120, 252);
 	text-align: center;
 }
 
 .sudoku{
-	background-color: rgb(240,240,240);
+	background-color: rgb(150,150,150);
 	padding-top: 50px;
 	padding-bottom: 250px;
 }
 
 .sudoku-pos {
-  margin-left:25%;
-	margin-right: 75%;
+  margin-left:20%;
 }
 
 .cell input{
@@ -195,9 +195,9 @@ li{
 }
 
 .info{
-	margin-top: -300px;
-	margin-left:25%;
-	padding-left: 500px;
+	margin-top: -375px;
+	margin-left: 23%;
+	padding-left: 465px;
 }
 
 .colors{
@@ -224,16 +224,18 @@ li{
 }
 
 .bottom{
+	border-top: 5px solid rgb(3, 120, 252);
 	padding-right: 10%;
 	padding-left: 10%;
 	padding-bottom: 100px;
 	padding-top: 50px;
-	background-color: rgb(228,228,228);
+	background-color: rgb(150,150,150);
 	display: grid;
 	grid-template-columns: 50% 50%;
 	grid-template-rows: 80px;
 	grid-gap: 20px;
-	color: black;
+	color: rgb(3, 120, 252);
+	font-weight: bold;
 }
 
 .bottom_title{
@@ -246,6 +248,39 @@ li{
 .link{
 	font-size: 16px;
 	color: green;
+}
+
+.buttonlist{
+	margin-left: -35px;
+}
+
+.button {
+	color: rgb(3, 120, 252);
+  font-size: 20px;
+  padding: 7px 13px;
+  border-radius: 3px;
+  border: 2px solid rgb(3, 120, 252);
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+}
+
+
+.button:hover{
+	cursor: pointer;
+	background: rgb(3, 120, 252);
+	color: white;
+	transition: .25s;
+}
+
+#tip{
+	padding-bottom: 65px;
+	padding-top: 75px;
+	padding-right: 15px;
+	width: 24vw;
+	margin-left: -50px;
+	padding-left: 15px;
 }
 
 @media(max-width:858px){
@@ -300,20 +335,23 @@ li{
 		grid-template-columns: 40% 60%;
 	}
 
+	.sudoku{
+		padding-bottom: 50px;
+	}
 	.sudoku-pos {
 	  margin-left: auto;
 		margin-right: auto;
 	}
 
 	.cell input{
-	    width: 30px;
-	    height: 30px;
-	    font-size: 20px;
+	    width: 33px;
+	    height: 33px;
+	    font-size: 22px;
 	}
 
 	#grid {
-	    width: 320px;
-	    height: 320px;
+	    width: 300px;
+	    height: 300px;
 	    border: 5px solid rgb(3, 120, 252);;
 	    border-collapse: collapse;
 	}
@@ -323,5 +361,15 @@ li{
 		margin-left: auto;
 		margin-right: auto;
 		padding-left: 0px;
+	}
+
+	#tip{
+		display: none;
+	}
+
+	.buttonlist{
+		margin-left: 0;
+		text-align: center;
+		margin-top: 40px;
 	}
 }

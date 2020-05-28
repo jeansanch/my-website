@@ -199,7 +199,7 @@ function clearTable(){
 			<div class="hamb"></div><div class="hamb"></div><div class="hamb"></div>
 		</label>
 		<ul>
-			<li id="first"><a href="#">Home Page</a></li>
+			<li id="first"><a href="index.html">Home Page</a></li>
 			<li><a href="about-me.html">About Me</a></li>
 			<li><a href="#">Projects</a></li>
 		</ul>
@@ -318,9 +318,12 @@ function clearTable(){
 			<li><div class="color-position"><div class="colors pink"></div></div><a>Column being compared</a></li>
 			<li><div class="color-position"><div class="colors blue"></div></div><a>Square being compared</a></li>
 		</ul>
-		<input type="button" value="SOLVE!" onclick="solve()">
-		<input type="button" value="CLEAR" onclick="clearTable()">
-		<input type="button" value="EXAMPLE SUDOKU" onclick="test()">
+		<p id="tip">Quick tip: Use TAB to easily go through the cells.</p>
+		<div class="buttonlist">
+			<input type="button" class="button fbutton" value="Solve!" onclick="solve()">
+			<input type="button" class="button" value="Clear" onclick="clearTable()">
+			<input type="button" class="button" value="Example Sudoku" onclick="test()">
+		</div>
 	</div>
 </div>
 <div class="bottom">
