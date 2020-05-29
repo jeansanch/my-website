@@ -375,4 +375,8 @@ li{
 		text-align: center;
 		margin-top: 40px;
 	}
+
+	.button{
+		background-color: white;
+	}
 }
