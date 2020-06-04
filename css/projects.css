@@ -186,6 +186,9 @@ h1{
   text-align: center;
 }
 
+h3{
+	font-size: 19px;
+}
 @media(max-width:858px){
 
 	ul{
