@@ -112,13 +112,8 @@ h1{
 	font-size: 36px;
 }
 
-.disclaimer{
-  padding-top: 80px;
-  padding-left: 20px;
-  padding-right: 20px;
-  font-size: 20px;
-  background-color: black;
-  color: #ccc;
+.projects{
+	padding-top: 80px;
 }
 
 .bottom{
@@ -160,13 +155,13 @@ h1{
 /* Add padding BETWEEN each column (if you want) */
 .row,
 .row > .column {
-
+	padding: 1%;
 }
 
 /* Create four equal columns that floats next to each other */
 .column {
   float: left;
-  width: 25%;
+  width: 23%;
 }
 
 /* Clear floats after rows */
@@ -189,6 +184,7 @@ h1{
 h3{
 	font-size: 19px;
 }
+
 @media(max-width:858px){
 
 	ul{
@@ -237,12 +233,12 @@ h3{
   }
 
   .column {
-    width: 50%;
+    width: 48%;
   }
 }
 
 @media screen and (max-width: 600px) {
   .column {
-    width: 100%;
+    width: 98%;
   }
 }
