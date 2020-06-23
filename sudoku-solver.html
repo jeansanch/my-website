@@ -79,6 +79,10 @@ function timer(ms) {
  return new Promise(res => setTimeout(res, ms));
 }
 
+function doublePair(pos){
+
+}
+
 function compare(pos){
   var numbers = [];
   var free = [1,2,3,4,5,6,7,8,9];
@@ -134,11 +138,7 @@ function compare(pos){
     }
   }
 	console.log("POS FREE:"+free);
-  if (free.length == 1){
-    write(pos, free[0]);
-    return 1;
-  }
-  return 0;
+  return free;
 }
 
 function printTable(){
@@ -155,6 +155,7 @@ function write(pos, value){
 }
 
 async function solve(){
+	free = [];
 	if (running == false){
 		running = true;
 	  table = [];
@@ -170,9 +171,11 @@ async function solve(){
 	      if (table[i] == 0){
 	        done = false;
 					await timer(0200);
-	        if (compare(i) == 1){
-	          changed = true;
-	        }
+					free = compare(i);
+					if (free.length == 1){
+						write(i, free[0]);
+						changed = true;
+					}
 	      }
 	    }
 	  }
@@ -204,140 +207,139 @@ function clearTable(){
 			<li><a href="projects.html">Projects</a></li>
 		</ul>
 	</nav>
-<div class="title">
-	<h1>Sudoku Solver</h1>
-</div>
-<div class="sudoku">
-		<p>This is just a prototype, it can solve simple sudokus, but can't solve sudokus where
-		you don't have a single answer for a cell (for now!), I'll be implementing this in the future</p>
-	<table id="grid" class="sudoku-pos">
-	  <tr>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell0" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell1" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell2" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell3" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell4" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell5" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell6" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell7" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell8" maxlength="1"></td>
-	  </tr>
-	  <tr>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');"  id="cell9" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell10" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell11" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell12" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell13" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell14" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell15" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell16" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell17" maxlength="1"></td>
-	  </tr>
-	  <tr>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell18" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell19" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell20" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell21" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell22" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell23" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell24" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell25" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell26" maxlength="1"></td>
-	  </tr>
-	  <tr>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell27" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell28" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell29" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell30" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell31" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell32" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell33" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell34" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell35" maxlength="1"></td>
-	  </tr>
-	  <tr>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell36" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell37" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell38" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell39" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell40" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell41" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell42" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell43" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell44" maxlength="1"></td>
-	  </tr>
-	  <tr>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell45" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell46" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell47" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell48" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell49" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell50" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell51" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell52" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell53" maxlength="1"></td>
-	  </tr>
-	  <tr>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell54" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell55" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell56" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell57" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell58" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell59" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell60" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell61" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell62" maxlength="1"></td>
-	  </tr>
-	  <tr>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell63" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell64" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell65" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell66" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell67" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell68" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell69" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell70" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell71" maxlength="1"></td>
-	  </tr>
-	  <tr>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell72" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell73" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell74" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell75" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell76" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell77" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell78" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell79" maxlength="1"></td>
-	    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell80" maxlength="1"></td>
-	  </tr>
-	</table>
-	<div class="info">
-		<ul>
-			<li><div class="color-position"><div class="colors green"></div></div><a>Non-filled cell</a></li>
-			<li><div class="color-position"><div class="colors purple"></div></div><a>Row being compared</a></li>
-			<li><div class="color-position"><div class="colors pink"></div></div><a>Column being compared</a></li>
-			<li><div class="color-position"><div class="colors blue"></div></div><a>Square being compared</a></li>
-		</ul>
-		<p id="tip">Quick tip: Use TAB to easily go through the cells.</p>
-		<div class="buttonlist">
-			<input type="button" class="button fbutton" value="Solve!" onclick="solve()">
-			<input type="button" class="button" value="Clear" onclick="clearTable()">
-			<input type="button" class="button" value="Example Sudoku" onclick="test()">
+	<div class="title">
+		<h1>Sudoku Solver</h1>
+	</div>
+	<div class="sudoku">
+			<p>This is just a prototype, it can solve simple sudokus, but can't solve sudokus where
+			you don't have a single answer for a cell (for now!), I'll be implementing this in the future</p>
+		<table id="grid" class="sudoku-pos">
+		  <tr>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell0" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell1" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell2" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell3" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell4" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell5" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell6" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell7" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell8" maxlength="1"></td>
+		  </tr>
+		  <tr>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');"  id="cell9" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell10" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell11" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell12" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell13" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell14" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell15" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell16" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell17" maxlength="1"></td>
+		  </tr>
+		  <tr>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell18" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell19" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell20" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell21" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell22" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell23" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell24" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell25" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell26" maxlength="1"></td>
+		  </tr>
+		  <tr>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell27" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell28" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell29" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell30" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell31" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell32" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell33" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell34" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell35" maxlength="1"></td>
+		  </tr>
+		  <tr>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell36" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell37" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell38" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell39" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell40" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell41" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell42" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell43" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell44" maxlength="1"></td>
+		  </tr>
+		  <tr>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell45" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell46" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell47" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell48" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell49" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell50" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell51" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell52" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell53" maxlength="1"></td>
+		  </tr>
+		  <tr>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell54" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell55" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell56" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell57" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell58" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell59" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell60" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell61" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell62" maxlength="1"></td>
+		  </tr>
+		  <tr>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell63" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell64" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell65" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell66" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell67" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell68" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell69" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell70" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell71" maxlength="1"></td>
+		  </tr>
+		  <tr>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell72" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell73" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell74" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell75" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell76" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell77" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell78" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell79" maxlength="1"></td>
+		    <td class="cell"><input class="inputs" type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="cell80" maxlength="1"></td>
+		  </tr>
+		</table>
+		<div class="info">
+			<ul>
+				<li><div class="color-position"><div class="colors green"></div></div><a>Non-filled cell</a></li>
+				<li><div class="color-position"><div class="colors purple"></div></div><a>Row being compared</a></li>
+				<li><div class="color-position"><div class="colors pink"></div></div><a>Column being compared</a></li>
+				<li><div class="color-position"><div class="colors blue"></div></div><a>Square being compared</a></li>
+			</ul>
+			<p id="tip">Quick tip: Use TAB to easily go through the cells.</p>
+			<div class="buttonlist">
+				<input type="button" class="button fbutton" value="Solve!" onclick="solve()">
+				<input type="button" class="button" value="Clear" onclick="clearTable()">
+				<input type="button" class="button" value="Example Sudoku" onclick="test()">
+			</div>
 		</div>
 	</div>
-</div>
-<div class="bottom">
-	<div class="bottom_title">
-		<h1>Contact Me</h1>
+	<div class="bottom">
+		<div class="bottom_title">
+			<h1>Contact Me</h1>
+		</div>
+		<div class="block">
+			git-lab:<br><a href="https://gitlab.com/jean.sanchuki" class="link">jean.sanchuki</a><br><br>
+			linkedin:<br><a href="https://www.linkedin.com/in/jean-sanch-f/" class="link">jean-sanch-f</a>
+		</div>
+		<div class="block">
+			e-mail:<br>jean.sanchuki@gmail.com
+		</div>
 	</div>
-	<div class="block">
-		git-lab:<br><a href="https://gitlab.com/jean.sanchuki" class="link">jean.sanchuki</a><br><br>
-		linkedin:<br><a href="https://www.linkedin.com/in/jean-sanch-f/" class="link">jean-sanch-f</a>
-	</div>
-	<div class="block">
-		e-mail:<br>jean.sanchuki@gmail.com
-	</div>
-</div>
-
 </body>
 </html>
