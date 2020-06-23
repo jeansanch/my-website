@@ -176,6 +176,9 @@ async function solve(){
 						write(i, free[0]);
 						changed = true;
 					}
+					if (free.length == 2){
+						doublePair(i, free);
+					}
 	      }
 	    }
 	  }
