@@ -121,8 +121,8 @@ function doublePair(pos, numbers){
 	var newid;
 	var possib = [];
 	var id;
-	console.log(pos);
-	console.log(numbers);
+	//console.log(pos);
+	//console.log(numbers);
 	for(let l = 0; l < 3; l++){
 		for(let i = 0; i < 9; i++){
 			values = [];
@@ -146,14 +146,14 @@ function doublePair(pos, numbers){
 			}
 			//possible values is the same in 2 different cells
 			if (values.length == 2){
-				console.log ("VALUES = "+values+" IN > "+id);
+				//console.log ("VALUES = "+values+" IN > "+id);
 				if (values[0] > values[1]){
 					var aux = values[0];
 					values[0] = values[1];
 					values[1] = aux;
 				}
 				if (values[0] == numbers[0] && values[1] == numbers[1]){
-					console.log ("NUMBERS = "+numbers+" IN > "+pos+" AND VALUES = "+values+" IN > "+id);
+					//console.log ("NUMBERS = "+numbers+" IN > "+pos+" AND VALUES = "+values+" IN > "+id);
 					for(let j = 0; j < 9; j++){
 						if (j != i){
 							possib = [];
@@ -172,11 +172,11 @@ function doublePair(pos, numbers){
 									break;
 							}
 							if(id == 62){
-								console.log("NEWID = "+newid);
+								//console.log("NEWID = "+newid);
 							}
 
 							if (table[newid] == 0 && newid != pos){
-								console.log("Calling compare " + newid);
+								//console.log("Calling compare " + newid);
 								possib = compare(newid)
 							}
 							if (possib.length == 3){
@@ -200,6 +200,63 @@ function doublePair(pos, numbers){
 		}
 	}
 	return false;
+}
+
+function arrayMerge(toMerge, from){
+	//console.log("to = "+toMerge+" from "+from +" length " +from.length);
+	for(let i = 0; i < from.length; i++){
+		//console.log("PUSH DE "+from[i]);
+		toMerge.push(from[i]);
+	}
+	//console.log("NEW TOMERGE "+ toMerge);
+	return toMerge;
+}
+
+function isAlone(pos, numbers){
+	var repeat = false;
+	var offset = parseInt(pos % 9);
+	var line = parseInt(pos/9);
+	var id;
+	var values = [];
+	for(let i = 0; i < numbers.length; i++){
+		for(let j = 0; j < 3; j++){
+			//ID TA QUEBRANDO O CODIGO
+			values = [];
+			for(let k = 0; k < 9; k++){
+				switch (j) {
+					case 0:
+						//squares
+						id = (parseInt(offset/3)*3) + (parseInt(line/3)*27) + (parseInt(k/3)*9) + (k % 3);
+					break;
+					case 1:
+						//rows
+						id = line*9+k;
+					break;
+					case 2:
+						// column
+						id = (k*9 + offset);
+					break;
+				}
+				if(table[id] == 0 && id != pos){
+					values = arrayMerge(values, compare(id));
+				}
+			}
+			//console.log("values = "+values);
+			if(i == 1 && pos == 7)
+				console.log(numbers[i] + " " + values);
+			if (values.length > 0){
+				for(let l = 0; l < values.length; l++){
+					if (numbers[i] == values[l]){
+						repeat = true;
+						break;
+					}
+				}
+				if (repeat == false)
+					return numbers[i];
+			}
+		}
+	}
+	return null;
 }
 
 function compare(pos){
@@ -274,7 +331,8 @@ function write(pos, value){
 }
 
 async function solve(){
-	free = [];
+	var free = [];
+	var isAloneVar;
 	if (running == false){
 		running = true;
 	  table = [];
@@ -295,8 +353,19 @@ async function solve(){
 						write(i, free[0]);
 						changed = true;
 					}
-					if (free.length == 2){
+					else if (free.length == 2){
 						if (doublePair(i, free) == true){
+							changed = true;
+						}
+					}
+					if (changed != true){
+						if(i == 7){
+							console.log("Chamando isAloneVar")
+						}
+						isAloneVar = isAlone(i, free)
+						if(isAloneVar != null){
+							console.log("Escrevendo com isAlone o valor" + isAloneVar + " Em " + i);
+							write(i, isAloneVar);
 							changed = true;
 						}
 					}
