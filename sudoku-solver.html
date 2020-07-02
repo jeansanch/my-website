@@ -213,12 +213,13 @@ function arrayMerge(toMerge, from){
 }
 
 function isAlone(pos, numbers){
-	var repeat = false;
+	var repeat;
 	var offset = parseInt(pos % 9);
 	var line = parseInt(pos/9);
 	var id;
 	var values = [];
 	for(let i = 0; i < numbers.length; i++){
+		repeat = false;
 		for(let j = 0; j < 3; j++){
 			//ID TA QUEBRANDO O CODIGO
 			values = [];
