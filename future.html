@@ -1,0 +1,60 @@
+<script type="text/javascript">
+
+	class State{
+		
+		constructor(){
+	    	this.nextUp = null;
+	    	this.nextLeft = null;
+	    	this.nextDown = null;
+	    	this.nextRight = null;
+	 	}
+		
+		nextState(movingDir){
+			switch(movingDir){
+				case 1:
+					return this.nextUp;
+				break;
+
+				case 2:
+					return this.nextLeft;
+				break;
+
+				case 3:
+					return this.nextDown;
+				break;
+
+				case 4:
+					return this.nextRight;
+				break;
+			}
+		}
+
+		setState(dir, State state){
+			switch(dir){
+				case 1:
+					this.nextUp = state;
+				break;
+
+				case 2:
+					this.nextLeft = state;
+				break;
+
+				case 3:
+					this.nextDown = state;
+				break;
+
+				case 4:
+					this.nextRight = state;
+				break;
+			}
+		}
+	}
+
+
+	var activeState[];
+
+	function init(){
+		activeState = new.array()
+	}
+
+</script>
