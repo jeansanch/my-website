@@ -5,28 +5,30 @@ class Player{
   constructor(x, y){
       this.x = x;
       this.y = y;
+      this.fov = 90
+      this.numRays = 35;
   }
 
-  playerRays(){
-    let numRays = 150;
-    let fov = 360;
-    var viewAngle = 0;
+  setFov(value){
+      this.fov = value;
+      this.numRays = this.fov*35/90;
+  }
+
+  playerRays(viewAngle){
     var dir = 0;
     var sum = 0;
     var min = 0;
-    // for(viewAngle = 0; viewAngle<360; viewAngle++){
-      for(var i = 0; i<numRays; i++){
-        sum = fov*(i/(numRays-1));
-        min = fov/2;
-        if (!(isFinite(sum)))
-        sum = 0;
-        if (!(isFinite(min)))
-        min = 0;
-        dir = -min+sum;
-        //console.log(i/numRays)
-        this.drawRay(dir+viewAngle);
-      }
-    // }
+    for(var i = 0; i<this.numRays; i++){
+      sum = this.fov*(i/(this.numRays-1));
+      min = this.fov/2;
+      if (!(isFinite(sum)))
+      sum = 0;
+      if (!(isFinite(min)))
+      min = 0;
+      dir = -min+sum;
+      //console.log(i/numRays)
+      this.drawRay(dir+viewAngle);
+    }
   }
 
   drawRay(direct){
@@ -44,12 +46,17 @@ class Player{
     cmat.stroke();
   }
 
-  drawPlayer(){
+  drawPlayer(pos){
+    cmat.clearRect(0, 0, canvas.width, canvas.height);
+    drawBase();
     cmat.fillStyle = "white"
     cmat.beginPath();
     cmat.arc(this.x, this.y, 5, 0, 2 * Math.PI);
     cmat.fill();
-    this.playerRays();
+    this.playerRays(pos);
+  }
+
+  arrowMove(){
   }
 }
 
@@ -68,12 +75,12 @@ canvas.addEventListener('mousemove', function(evt){
     var mousePos = getMousePos(canvas, evt);
     user.x = mousePos.x;
     user.y = mousePos.y;
-    cmat.clearRect(0, 0, canvas.width, canvas.height);
-    drawBase();
-    user.drawPlayer();
+    user.drawPlayer(0);
   }
 }, false);
 
+canvas.addEventListener('keypress', function(kb){
+}, false);
 
 function degrees_to_radians(degrees)
 {
@@ -90,15 +97,31 @@ function drawBase(){
 function pressionadoDebug(){
   if(debug==false){
     document.getElementById('botaoDebug').style.cssText = 'background-color: green;';
+    user.setFov(360);
     debug=true;
   }
   else{
     document.getElementById('botaoDebug').style.cssText = 'background-color: #d82424;';
+    user.setFov(90);
+    user.x = 300;
+    user.y = 300;
+    user.drawPlayer(0);
     debug=false;
   }
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 // Create player
 user = new Player(300, 300);
-user.drawPlayer();
+async function a(){
+  for (var j = 0; j<360; j++){
+    user.drawPlayer(j)
+    await sleep(10);
+  }
+}
+a();
+// user.drawPlayer(j);
 drawBase();
