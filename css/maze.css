@@ -1,0 +1,9 @@
+body{
+  background-color: grey;
+}
+
+.apontador{
+    background-color: #d82424;
+    cursor: pointer;
+    border: 0;
+}
