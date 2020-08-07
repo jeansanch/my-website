@@ -121,6 +121,7 @@ async function a(){
     user.drawPlayer(j)
     await sleep(10);
   }
+  a();
 }
 a();
 // user.drawPlayer(j);
