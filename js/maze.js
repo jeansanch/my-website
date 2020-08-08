@@ -47,7 +47,6 @@ class Player{
   }
 
   drawPlayer(pos){
-    cmat.clearRect(0, 0, canvas.width, canvas.height);
     drawBase();
     cmat.fillStyle = "white"
     cmat.beginPath();
@@ -68,8 +67,6 @@ function getMousePos(canvas, evt){
   };
 }
 
-var debug = false;
-
 canvas.addEventListener('mousemove', function(evt){
   if (debug){
     var mousePos = getMousePos(canvas, evt);
@@ -88,11 +85,13 @@ function degrees_to_radians(degrees){
 }
 
 function drawBase(){
+  cmat.clearRect(0, 0, canvas.width, canvas.height);
   cmat.strokeStyle = "white";
   cmat.lineWidth = 2;
   cmat.strokeRect(0, 0, 600, 600);
 }
 
+var debug = false;
 function pressionadoDebug(){
   if(debug==false){
     document.getElementById('botaoDebug').style.cssText = 'background-color: green;';
@@ -110,7 +109,6 @@ function pressionadoDebug(){
 }
 
 var spin = false;
-
 function pressionadoSpin(){
   if(spin==false){
     document.getElementById('botaoSpin').style.cssText = 'background-color: green;';
