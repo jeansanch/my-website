@@ -29,7 +29,7 @@ class Player{
       min = 0;
       dir = -min+sum;
       //console.log(i/numRays)
-      this.drawRay(dir+this.viewAngle);
+      this.drawRay(-dir-this.viewAngle);
     }
   }
 
@@ -40,7 +40,6 @@ class Player{
     y = this.y+Math.sin(direct)*100;
     x = this.x+Math.cos(direct)*100;
     cmat.beginPath();
-    //console.log(this.x, this.y, x, y)
     cmat.strokeStyle = "white";
     cmat.lineWidth = 1;
     cmat.moveTo(this.x, this.y);
@@ -93,7 +92,11 @@ var Keys = {
   up: false,
   down: false,
   left: false,
-  right: false
+  right: false,
+  w: false,
+  a: false,
+  s: false,
+  d: false
 };
 
 window.onkeydown = function(kb){
@@ -105,22 +108,51 @@ window.onkeydown = function(kb){
   else if (kc === 38) Keys.up = true;
   else if (kc === 39) Keys.right = true;
   else if (kc === 40) Keys.down = true;
+  else if (kc === 87) Keys.w = true;
+  else if (kc === 65) Keys.a = true;
+  else if (kc === 83) Keys.s = true;
+  else if (kc === 68) Keys.d = true;
 
   if (Keys.up) {
-    user.y-=3;
+    console.log("Old: X = "+user.x+" Y = "+user.y+" ANGLE = "+user.viewAngle);
+    user.y -= (Math.sin(user.viewAngle))*5;
+    user.x += (Math.cos(user.viewAngle))*5;
+    console.log("New: X = "+user.x+" Y = "+user.y+" ANGLE = "+user.viewAngle);
     user.drawPlayer();
   }
   else if (Keys.down){
-    user.y+=3;
+    console.log("Old: X = "+user.x+" Y = "+user.y+" ANGLE = "+user.viewAngle);
+    user.y += (Math.sin(user.viewAngle))*5;
+    user.x -= (Math.cos(user.viewAngle))*5;
+    console.log("New: X = "+user.x+" Y = "+user.y+" ANGLE = "+user.viewAngle);
     user.drawPlayer();
   }
 
   if (Keys.left){
-    user.x-=3;
+    user.viewAngle+=15;
+    console.log("Angle = "+user.viewAngle);
     user.drawPlayer();
   }
   else if (Keys.right){
-    user.x+=3;
+    user.viewAngle-=15;
+    console.log("Angle = "+user.viewAngle);
+    user.drawPlayer();
+  }
+
+  if (Keys.w){
+    user.y+=1;
+    user.drawPlayer();
+  }
+  else if (Keys.s){
+    user.y-=1;
+    user.drawPlayer();
+  }
+  else if (Keys.a){
+    user.x-=1;
+    user.drawPlayer();
+  }
+  else if (Keys.d){
+    user.x+=1;
     user.drawPlayer();
   }
 };
@@ -133,6 +165,10 @@ window.onkeyup = function(kb) {
   else if (kc === 38) Keys.up = false;
   else if (kc === 39) Keys.right = false;
   else if (kc === 40) Keys.down = false;
+  else if (kc === 87) Keys.w = false;
+  else if (kc === 65) Keys.a = false;
+  else if (kc === 83) Keys.s = false;
+  else if (kc === 68) Keys.d = false;
 };
 
 function degrees_to_radians(degrees){
