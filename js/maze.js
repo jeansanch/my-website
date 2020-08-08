@@ -88,6 +88,8 @@ canvas.addEventListener('mousemove', function(evt){
   }
 }, false);
 
+var radAngle = 0;
+
 var Keys = {
   up: false,
   down: false,
@@ -114,28 +116,24 @@ window.onkeydown = function(kb){
   else if (kc === 68) Keys.d = true;
 
   if (Keys.up) {
-    console.log("Old: X = "+user.x+" Y = "+user.y+" ANGLE = "+user.viewAngle);
-    user.y -= (Math.sin(user.viewAngle))*5;
-    user.x += (Math.cos(user.viewAngle))*5;
-    console.log("New: X = "+user.x+" Y = "+user.y+" ANGLE = "+user.viewAngle);
+    user.y -= Math.sin(radAngle)*5;
+    user.x += Math.cos(radAngle)*5;
     user.drawPlayer();
   }
   else if (Keys.down){
-    console.log("Old: X = "+user.x+" Y = "+user.y+" ANGLE = "+user.viewAngle);
-    user.y += (Math.sin(user.viewAngle))*5;
-    user.x -= (Math.cos(user.viewAngle))*5;
-    console.log("New: X = "+user.x+" Y = "+user.y+" ANGLE = "+user.viewAngle);
+    user.y += Math.sin(radAngle)*5;
+    user.x -= Math.cos(radAngle)*5;
     user.drawPlayer();
   }
 
   if (Keys.left){
     user.viewAngle+=15;
-    console.log("Angle = "+user.viewAngle);
+    radAngle = degrees_to_radians(user.viewAngle);
     user.drawPlayer();
   }
   else if (Keys.right){
     user.viewAngle-=15;
-    console.log("Angle = "+user.viewAngle);
+    radAngle = degrees_to_radians(user.viewAngle);
     user.drawPlayer();
   }
 
