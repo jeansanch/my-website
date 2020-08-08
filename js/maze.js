@@ -7,6 +7,7 @@ class Player{
       this.y = y;
       this.fov = 90
       this.numRays = 35;
+      this.viewAngle = 0;
   }
 
   setFov(value){
@@ -14,7 +15,8 @@ class Player{
       this.numRays = this.fov*35/90;
   }
 
-  playerRays(viewAngle){
+
+  playerRays(){
     var dir = 0;
     var sum = 0;
     var min = 0;
@@ -27,7 +29,7 @@ class Player{
       min = 0;
       dir = -min+sum;
       //console.log(i/numRays)
-      this.drawRay(dir+viewAngle);
+      this.drawRay(dir+this.viewAngle);
     }
   }
 
@@ -46,17 +48,28 @@ class Player{
     cmat.stroke();
   }
 
-  drawPlayer(pos){
+  drawPlayer(){
     drawBase();
     cmat.fillStyle = "white"
     cmat.beginPath();
     cmat.arc(this.x, this.y, 5, 0, 2 * Math.PI);
     cmat.fill();
-    this.playerRays(pos);
+    this.playerRays();
   }
 
   arrowMove(){
   }
+}
+
+class Barrier{
+
+  constructor(x1, y1, x2, y2){
+    this.x1 = x1;
+    this.y1 = y1;
+    this.x2 = x2;
+    this.y2 = y2;
+  }
+
 }
 
 function getMousePos(canvas, evt){
@@ -72,12 +85,55 @@ canvas.addEventListener('mousemove', function(evt){
     var mousePos = getMousePos(canvas, evt);
     user.x = mousePos.x;
     user.y = mousePos.y;
-    user.drawPlayer(0);
+    user.drawPlayer();
   }
 }, false);
 
-canvas.addEventListener('keypress', function(kb){
-}, false);
+var Keys = {
+  up: false,
+  down: false,
+  left: false,
+  right: false
+};
+
+window.onkeydown = function(kb){
+  console.log("A key was pressed")
+  var kc = kb.keyCode;
+  kb.preventDefault();
+
+  if      (kc === 37) Keys.left = true;
+  else if (kc === 38) Keys.up = true;
+  else if (kc === 39) Keys.right = true;
+  else if (kc === 40) Keys.down = true;
+
+  if (Keys.up) {
+    user.y-=3;
+    user.drawPlayer();
+  }
+  else if (Keys.down){
+    user.y+=3;
+    user.drawPlayer();
+  }
+
+  if (Keys.left){
+    user.x-=3;
+    user.drawPlayer();
+  }
+  else if (Keys.right){
+    user.x+=3;
+    user.drawPlayer();
+  }
+};
+
+window.onkeyup = function(kb) {
+  var kc = kb.keyCode;
+  kb.preventDefault();
+
+  if      (kc === 37) Keys.left = false;
+  else if (kc === 38) Keys.up = false;
+  else if (kc === 39) Keys.right = false;
+  else if (kc === 40) Keys.down = false;
+};
 
 function degrees_to_radians(degrees){
   var pi = Math.PI;
@@ -103,7 +159,7 @@ function pressionadoDebug(){
     user.setFov(90);
     user.x = 300;
     user.y = 300;
-    user.drawPlayer(0);
+    user.drawPlayer();
     debug=false;
   }
 }
@@ -122,7 +178,7 @@ function pressionadoSpin(){
 }
 
 
-function sleep(ms) {
+function sleep(ms){
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
@@ -133,10 +189,11 @@ async function sbinalla(){
     return;
   }
   for (var j = 0; j<360; j++){
-    user.drawPlayer(j)
+    user.viewAngle = j;
+    user.drawPlayer()
     await sleep(10);
   }
   sbinalla();
 }
 
-user.drawPlayer(0);
+user.drawPlayer();
