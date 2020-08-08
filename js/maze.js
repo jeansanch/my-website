@@ -82,12 +82,11 @@ canvas.addEventListener('mousemove', function(evt){
 canvas.addEventListener('keypress', function(kb){
 }, false);
 
-function degrees_to_radians(degrees)
-{
+function degrees_to_radians(degrees){
   var pi = Math.PI;
   return degrees * (pi/180);
 }
-// Outside boundry
+
 function drawBase(){
   cmat.strokeStyle = "white";
   cmat.lineWidth = 2;
@@ -110,19 +109,36 @@ function pressionadoDebug(){
   }
 }
 
+var spin = false;
+
+function pressionadoSpin(){
+  if(spin==false){
+    document.getElementById('botaoSpin').style.cssText = 'background-color: green;';
+    spin=true;
+    sbinalla();
+  }
+  else{
+    document.getElementById('botaoSpin').style.cssText = 'background-color: #d82424;';
+    spin=false;
+  }
+}
+
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // Create player
 user = new Player(300, 300);
-async function a(){
+async function sbinalla(){
+  if(!spin){
+    return;
+  }
   for (var j = 0; j<360; j++){
     user.drawPlayer(j)
     await sleep(10);
   }
-  a();
+  sbinalla();
 }
-a();
-// user.drawPlayer(j);
-drawBase();
+
+user.drawPlayer(0);
