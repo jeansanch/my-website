@@ -71,6 +71,21 @@ class Barrier{
 
 }
 
+class MazeBlock{
+
+  constructor(xAxis, yAxis, fath, lastSize){
+    this.x = xAxis;
+    this.y = yAxis;
+    this.up = null;
+    this.left = null;
+    this.right = null;
+    this.down = null;
+    this.father = fath;
+    this.end = false;
+    this.size = lastSize+1;
+  }
+}
+
 function getMousePos(canvas, evt){
   var rect = canvas.getBoundingClientRect();
   return {
@@ -110,10 +125,12 @@ window.onkeydown = function(kb){
   else if (kc === 38) Keys.up = true;
   else if (kc === 39) Keys.right = true;
   else if (kc === 40) Keys.down = true;
-  else if (kc === 87) Keys.w = true;
-  else if (kc === 65) Keys.a = true;
-  else if (kc === 83) Keys.s = true;
-  else if (kc === 68) Keys.d = true;
+  else if (debug){
+    if (kc === 87) Keys.w = true;
+    else if (kc === 65) Keys.a = true;
+    else if (kc === 83) Keys.s = true;
+    else if (kc === 68) Keys.d = true;
+  }
 
   if (Keys.up) {
     user.y -= Math.sin(radAngle)*5;
