@@ -1,6 +1,6 @@
 const canvas = document.getElementById('mazeCanvas');
 const cmat = canvas.getContext('2d');
-
+const blockDist = 50;
 class Player{
   constructor(x, y){
       this.x = x;
@@ -48,7 +48,7 @@ class Player{
   }
 
   drawPlayer(){
-    drawBase();
+    //drawBase();
     cmat.fillStyle = "white"
     cmat.beginPath();
     cmat.arc(this.x, this.y, 5, 0, 2 * Math.PI);
@@ -83,6 +83,66 @@ class MazeBlock{
     this.father = fath;
     this.end = false;
     this.size = lastSize+1;
+    cmat.fillStyle = "black";
+    cmat.fillRect(this.x-blockDist/2, this.y-blockDist/2, this.x+blockDist/2, this.y+blockDist/2);
+  }
+
+  create(start){
+    var rand;
+    var flagCanGo = true;
+    var pixelData;
+    while(flagCanGo == true){
+      rand = Math.floor(Math.random() * 4);
+      switch(rand){
+        case 0:
+          if(this.y-blockDist < 0){
+            flagCanGo = false;
+            break;
+          }
+          if(cmat.getImageData(this.x, this.y-blockDist) != red){
+              flagCanGo = false;
+              break;
+          }
+          this.up = new MazeBlock(this.x, this.y-blockDist);
+        break;
+
+        case 1:
+          if(this.y+blockDist < 600){
+            flagCanGo = false;
+            break;
+          }
+          if(cmat.getImageData(this.x, this.y+blockDist) != red){
+              flagCanGo = false
+              break;
+          }
+          this.down = new MazeBlock(this.x, this.y+blockDist);
+        break;
+
+        case 2:
+          if(this.x-blockDist < 0){
+            flagCanGo = false;
+            break;
+          }
+          if(cmat.getImageData(this.x-blockDist, this.y) != red){
+              flagCanGo = false;
+              break;
+          }
+          this.left = new MazeBlock(this.x-blockDist, this.y);
+        break;
+
+        case 3:
+          if(this.x+blockDist < 0){
+            flagCanGo = false;
+            break;
+          }
+          if(cmat.getImageData(this.x+blockDist, this.y) != red){
+              flagCanGo = false;
+              break;
+          }
+          this.left = new MazeBlock(this.x+blockDist, this.y);
+        break;
+      }
+    }
   }
 }
 
@@ -234,8 +294,12 @@ function sleep(ms){
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// Create player
-user = new Player(300, 300);
+function generateMaze(){
+  cmat.fillStyle = "red";
+  cmat.fillRect(0, 0, 600, 600);
+  var start = new MazeBlock(25,25, null, 0);
+}
+
 async function sbinalla(){
   if(!spin){
     return;
@@ -248,4 +312,9 @@ async function sbinalla(){
   sbinalla();
 }
 
-user.drawPlayer();
+generateMaze();
+
+// Create player
+//user = new Player(300, 300);
+
+//user.drawPlayer();
