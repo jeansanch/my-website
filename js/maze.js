@@ -136,22 +136,23 @@ window.onkeydown = function(kb){
     radAngle = degrees_to_radians(user.viewAngle);
     user.drawPlayer();
   }
-
-  if (Keys.w){
-    user.y+=1;
-    user.drawPlayer();
-  }
-  else if (Keys.s){
-    user.y-=1;
-    user.drawPlayer();
-  }
-  else if (Keys.a){
-    user.x-=1;
-    user.drawPlayer();
-  }
-  else if (Keys.d){
-    user.x+=1;
-    user.drawPlayer();
+  if (debug){
+    if (Keys.w){
+      user.y+=5;
+      user.drawPlayer();
+    }
+    else if (Keys.s){
+      user.y-=5;
+      user.drawPlayer();
+    }
+    else if (Keys.a){
+      user.x-=5;
+      user.drawPlayer();
+    }
+    else if (Keys.d){
+      user.x+=5;
+      user.drawPlayer();
+    }
   }
 };
 
