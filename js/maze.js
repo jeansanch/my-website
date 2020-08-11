@@ -8,7 +8,7 @@ class Player{
       this.y = y;
       this.fov = 90
       this.numRays = 35;
-      this.viewAngle = 0;
+      this.viewAngle = 270;
   }
 
   setFov(value){
@@ -173,9 +173,6 @@ class MazeBlock{
     return rand;
   }
 
-  buildWall(){
-
-  }
 }
 
 function getMousePos(canvas, evt){
@@ -237,11 +234,13 @@ window.onkeydown = function(kb){
 
   if (Keys.left){
     user.viewAngle+=15;
+    user.viewAngle = user.viewAngle % 360;
     radAngle = degrees_to_radians(user.viewAngle);
     user.drawPlayer();
   }
   else if (Keys.right){
     user.viewAngle-=15;
+    user.viewAngle = user.viewAngle % 360;
     radAngle = degrees_to_radians(user.viewAngle);
     user.drawPlayer();
   }
@@ -330,6 +329,7 @@ function generateMaze(){
   cmat.fillStyle = "red";
   cmat.fillRect(0, 0, 600, 600);
   var start = new MazeBlock(25,25, null, 0);
+  drawWalls(start);
 }
 
 async function sbinalla(){
@@ -344,8 +344,53 @@ async function sbinalla(){
   sbinalla();
 }
 
+function drawWalls(point){
+  if(point.up == null || (point.father != null && point != point.father.down)){
+    cmat.beginPath();
+    cmat.strokeStyle = "white";
+    cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
+    cmat.lineTo(point.x+blockDist/2, point.y-blockDist/2);
+    cmat.stroke();
+  }
+  else{
+    drawWalls(point.up);
+  }
+
+  if(point.down == null || (point.father != null && point != point.father.up)){
+    cmat.beginPath();
+    cmat.strokeStyle = "white";
+    cmat.moveTo(point.x-blockDist/2, point.y+blockDist/2);
+    cmat.lineTo(point.x+blockDist/2, point.y+blockDist/2);
+    cmat.stroke();
+  }
+  else{
+    drawWalls(point.down);
+  }
+
+  if(point.left == null || (point.father != null && point != point.father.right)){
+    cmat.beginPath();
+    cmat.strokeStyle = "white";
+    cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
+    cmat.lineTo(point.x-blockDist/2, point.y+blockDist/2);
+    cmat.stroke();
+  }
+  else{
+    drawWalls(point.left);
+  }
+
+  if(point.right == null || (point.father != null && point != point.father.left)){
+    cmat.beginPath();
+    cmat.strokeStyle = "white";
+    cmat.moveTo(point.x+blockDist/2, point.y-blockDist/2);
+    cmat.lineTo(point.x+blockDist/2, point.y+blockDist/2);
+    cmat.stroke();
+  }
+  else{
+    drawWalls(point.right);
+  }
+}
+
 generateMaze();
-//start.drawWalls();
 
 // Create player
 user = new Player(25, 25);
