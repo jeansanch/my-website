@@ -83,105 +83,98 @@ class MazeBlock{
     this.down = null;
     this.father = fath;
     this.size = lastSize+1;
+    this.xP = (cmat.getImageData(this.x+blockDist, this.y, 1, 1).data)[0];
+    this.xM = (cmat.getImageData(this.x-blockDist, this.y, 1, 1).data)[0];
+    this.yP = (cmat.getImageData(this.x, this.y+blockDist, 1, 1).data)[0];
+    this.yM = (cmat.getImageData(this.x, this.y-blockDist, 1, 1).data)[0];
     cmat.fillStyle = "black";
-    cmat.fillRect(this.x-blockDist/2, this.y-blockDist/2, this.x+blockDist/2, this.y+blockDist/2);
-    //create();
+    cmat.fillRect(this.x-blockDist/2, this.y-blockDist/2, blockDist, blockDist);
+    this.create();
   }
 
   create(){
-    var pixelData;
-    if (cmat.getImageData(this.x, this.y-blockDist) != red && cmat.getImageData(this.x, this.y+blockDist) != red && cmat.getImageData(this.x+blockDist, this.y) != red && cmat.getImageData(this.x-blockDist, this.y) != red){
+    if (this.yM != 255  && this.yP != 255 && this.xP != 255 && this.xM != 255){
       return;
     }
-    var rand = createAux(false);
+
+    var rand = this.createAux(false);
     var divide = Math.floor(Math.random() * 2);
+
     if(divide == 1){
       return;
     }
+
     switch(rand){
       case 0:
-        if (cmat.getImageData(this.x, this.y+blockDist) != red && cmat.getImageData(this.x+blockDist, this.y) != red && cmat.getImageData(this.x-blockDist, this.y) != red){
+        if (this.yP != 255 && this.xP != 255 && this.xM != 255){
           return;
         }
       break;
 
       case 1:
-        if (cmat.getImageData(this.x, this.y-blockDist) != red && cmat.getImageData(this.x+blockDist, this.y) != red && cmat.getImageData(this.x-blockDist, this.y) != red){
+        if (this.yM != 255 && this.xP != 255 && this.xM != 255){
           return;
         }
       break;
 
       case 2:
-        if (cmat.getImageData(this.x, this.y-blockDist) != red && cmat.getImageData(this.x, this.y+blockDist) != red && cmat.getImageData(this.x+blockDist, this.y) != red){
+        if (this.yM != 255 && this.yP != 255 && this.xP != 255){
           return;
         }
       break;
 
       case 3:
-        if (cmat.getImageData(this.x, this.y-blockDist) != red && cmat.getImageData(this.x, this.y+blockDist) != red && cmat.getImageData(this.x-blockDist, this.y) != red){
+        if (this.yM != 255 && this.yP != 255 && this.xM != 255){
           return;
         }
       break;
       }
-    createAux(true);
+    this.createAux(true, rand);
   }
 
-  createAux(second){
+  createAux(second, oldRand){
     var rand;
-    var flagCanGo = true;
-    while(flagCanGo){
-      rand = second ? Math.floor(Math.random() * 4) : Math.floor(Math.random() * 3)+1+rand % 4;
+    while(true){
+      rand = second ? (Math.floor(Math.random() * 3)+1+oldRand) % 4 : Math.floor(Math.random() * 4);
       switch(rand){
         case 0:
-          if(this.y-blockDist < 0){
-            flagCanGo = false;
-            break;
-          }
-          if(cmat.getImageData(this.x, this.y-blockDist) != red){
-              flagCanGo = false;
+          if(this.yM != 255){
               break;
           }
           this.up = new MazeBlock(this.x, this.y-blockDist, this, this.size);
+          return rand;
         break;
 
         case 1:
-          if(this.y+blockDist < 600){
-            flagCanGo = false;
-            break;
-          }
-          if(cmat.getImageData(this.x, this.y+blockDist) != red){
-              flagCanGo = false
+          if(this.yP != 255){
               break;
           }
           this.down = new MazeBlock(this.x, this.y+blockDist, this, this.size);
+          return rand;
         break;
 
         case 2:
-          if(this.x-blockDist < 0){
-            flagCanGo = false;
-            break;
-          }
-          if(cmat.getImageData(this.x-blockDist, this.y) != red){
-              flagCanGo = false;
+          if(this.xM != 255){
               break;
           }
           this.left = new MazeBlock(this.x-blockDist, this.y, this, this.size);
+          return rand;
         break;
 
         case 3:
-          if(this.x+blockDist < 0){
-            flagCanGo = false;
-            break;
-          }
-          if(cmat.getImageData(this.x+blockDist, this.y) != red){
-              flagCanGo = false;
+          if(this.xP != 255){
               break;
           }
-          this.left = new MazeBlock(this.x+blockDist, this.y, this, this.size);
+          this.right = new MazeBlock(this.x+blockDist, this.y, this, this.size);
+          return rand;
         break;
       }
     }
     return rand;
+  }
+
+  buildWall(){
+
   }
 }
 
@@ -352,9 +345,9 @@ async function sbinalla(){
 }
 
 generateMaze();
-start.drawWalls();
+//start.drawWalls();
 
 // Create player
-//user = new Player(300, 300);
+user = new Player(25, 25);
 
-//user.drawPlayer();
+user.drawPlayer();
