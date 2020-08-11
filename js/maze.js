@@ -1,7 +1,7 @@
 const canvas = document.getElementById('mazeCanvas');
 const cmat = canvas.getContext('2d');
 const blockDist = 50;
-
+var blocksCreated = 0;
 class Player{
   constructor(x, y){
       this.x = x;
@@ -93,6 +93,7 @@ class MazeBlock{
   }
 
   create(){
+    blocksCreated++;
     if (this.yM != 255  && this.yP != 255 && this.xP != 255 && this.xM != 255){
       return;
     }
@@ -103,7 +104,10 @@ class MazeBlock{
     if(divide == 1){
       return;
     }
-
+    this.xP = (cmat.getImageData(this.x+blockDist, this.y, 1, 1).data)[0];
+    this.xM = (cmat.getImageData(this.x-blockDist, this.y, 1, 1).data)[0];
+    this.yP = (cmat.getImageData(this.x, this.y+blockDist, 1, 1).data)[0];
+    this.yM = (cmat.getImageData(this.x, this.y-blockDist, 1, 1).data)[0];
     switch(rand){
       case 0:
         if (this.yP != 255 && this.xP != 255 && this.xM != 255){
@@ -129,7 +133,11 @@ class MazeBlock{
         }
       break;
       }
+    cmat.fillStyle = "blue";
+    cmat.fillRect(this.x-blockDist/2, this.y-blockDist/2, blockDist, blockDist);
     this.createAux(true, rand);
+    cmat.fillStyle = "black";
+    cmat.fillRect(this.x-blockDist/2, this.y-blockDist/2, blockDist, blockDist);
   }
 
   createAux(second, oldRand){
@@ -172,7 +180,6 @@ class MazeBlock{
     }
     return rand;
   }
-
 }
 
 function getMousePos(canvas, evt){
@@ -191,8 +198,6 @@ canvas.addEventListener('mousemove', function(evt){
     user.drawPlayer();
   }
 }, false);
-
-var radAngle = 0;
 
 var Keys = {
   up: false,
@@ -328,8 +333,7 @@ function sleep(ms){
 function generateMaze(){
   cmat.fillStyle = "red";
   cmat.fillRect(0, 0, 600, 600);
-  var start = new MazeBlock(25,25, null, 0);
-  drawWalls(start);
+  return new MazeBlock(25,25, null, 0);
 }
 
 async function sbinalla(){
@@ -337,26 +341,25 @@ async function sbinalla(){
     return;
   }
   for (var j = 0; j<360; j++){
-    user.viewAngle = j;
+    user.viewAngle++;
     user.drawPlayer()
     await sleep(10);
   }
   sbinalla();
 }
 
-function drawWalls(point){
-  if(point.up == null || (point.father != null && point != point.father.down)){
+function drawFirstWalls(point){
     cmat.beginPath();
     cmat.strokeStyle = "white";
     cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
     cmat.lineTo(point.x+blockDist/2, point.y-blockDist/2);
     cmat.stroke();
-  }
-  else{
-    drawWalls(point.up);
-  }
 
-  if(point.down == null || (point.father != null && point != point.father.up)){
+    cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
+    cmat.lineTo(point.x-blockDist/2, point.y+blockDist/2);
+    cmat.stroke();
+
+  if(point.down == null){
     cmat.beginPath();
     cmat.strokeStyle = "white";
     cmat.moveTo(point.x-blockDist/2, point.y+blockDist/2);
@@ -367,18 +370,7 @@ function drawWalls(point){
     drawWalls(point.down);
   }
 
-  if(point.left == null || (point.father != null && point != point.father.right)){
-    cmat.beginPath();
-    cmat.strokeStyle = "white";
-    cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
-    cmat.lineTo(point.x-blockDist/2, point.y+blockDist/2);
-    cmat.stroke();
-  }
-  else{
-    drawWalls(point.left);
-  }
-
-  if(point.right == null || (point.father != null && point != point.father.left)){
+  if(point.right == null){
     cmat.beginPath();
     cmat.strokeStyle = "white";
     cmat.moveTo(point.x+blockDist/2, point.y-blockDist/2);
@@ -390,9 +382,61 @@ function drawWalls(point){
   }
 }
 
-generateMaze();
+function drawWalls(point){
+  if(point.up == null && point != point.father.down){
+    cmat.beginPath();
+    cmat.strokeStyle = "white";
+    cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
+    cmat.lineTo(point.x+blockDist/2, point.y-blockDist/2);
+    cmat.stroke();
+  }
+  else if (point != point.father.down){
+    drawWalls(point.up);
+  }
+
+  if(point.down == null && point != point.father.up){
+    cmat.beginPath();
+    cmat.strokeStyle = "white";
+    cmat.moveTo(point.x-blockDist/2, point.y+blockDist/2);
+    cmat.lineTo(point.x+blockDist/2, point.y+blockDist/2);
+    cmat.stroke();
+  }
+  else if (point != point.father.up){
+    drawWalls(point.down);
+  }
+
+  if(point.left == null && point != point.father.right){
+    cmat.beginPath();
+    cmat.strokeStyle = "white";
+    cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
+    cmat.lineTo(point.x-blockDist/2, point.y+blockDist/2);
+    cmat.stroke();
+  }
+  else if (point != point.father.right){
+    drawWalls(point.left);
+  }
+
+  if(point.right == null && point != point.father.left){
+    cmat.beginPath();
+    cmat.strokeStyle = "white";
+    cmat.moveTo(point.x+blockDist/2, point.y-blockDist/2);
+    cmat.lineTo(point.x+blockDist/2, point.y+blockDist/2);
+    cmat.stroke();
+  }
+  else if (point != point.father.left){
+    drawWalls(point.right);
+  }
+}
+
+
+var init = generateMaze();
+drawFirstWalls(init);
 
 // Create player
 user = new Player(25, 25);
 
+var radAngle = degrees_to_radians(user.viewAngle);
+
 user.drawPlayer();
+
+console.log("Blocks created = "+blocksCreated);
