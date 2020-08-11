@@ -1,6 +1,7 @@
 const canvas = document.getElementById('mazeCanvas');
 const cmat = canvas.getContext('2d');
 const blockDist = 50;
+
 class Player{
   constructor(x, y){
       this.x = x;
@@ -81,18 +82,55 @@ class MazeBlock{
     this.right = null;
     this.down = null;
     this.father = fath;
-    this.end = false;
     this.size = lastSize+1;
     cmat.fillStyle = "black";
     cmat.fillRect(this.x-blockDist/2, this.y-blockDist/2, this.x+blockDist/2, this.y+blockDist/2);
+    //create();
   }
 
-  create(start){
+  create(){
+    var pixelData;
+    if (cmat.getImageData(this.x, this.y-blockDist) != red && cmat.getImageData(this.x, this.y+blockDist) != red && cmat.getImageData(this.x+blockDist, this.y) != red && cmat.getImageData(this.x-blockDist, this.y) != red){
+      return;
+    }
+    createAux(false);
+    var divide = Math.floor(Math.random() * 2);
+    if(divide == 1){
+      return;
+    }
+    switch(rand){
+      case 0:
+        if (cmat.getImageData(this.x, this.y+blockDist) != red && cmat.getImageData(this.x+blockDist, this.y) != red && cmat.getImageData(this.x-blockDist, this.y) != red){
+          return;
+        }
+      break;
+
+      case 1:
+        if (cmat.getImageData(this.x, this.y-blockDist) != red && cmat.getImageData(this.x+blockDist, this.y) != red && cmat.getImageData(this.x-blockDist, this.y) != red){
+          return;
+        }
+      break;
+
+      case 2:
+        if (cmat.getImageData(this.x, this.y-blockDist) != red && cmat.getImageData(this.x, this.y+blockDist) != red && cmat.getImageData(this.x+blockDist, this.y) != red){
+          return;
+        }
+      break;
+
+      case 3:
+        if (cmat.getImageData(this.x, this.y-blockDist) != red && cmat.getImageData(this.x, this.y+blockDist) != red && cmat.getImageData(this.x-blockDist, this.y) != red){
+          return;
+        }
+      break;
+      }
+    createAux(true);
+  }
+
+  createAux(second){
     var rand;
     var flagCanGo = true;
-    var pixelData;
-    while(flagCanGo == true){
-      rand = Math.floor(Math.random() * 4);
+    while(flagCanGo){
+      rand = second ? Math.floor(Math.random() * 4) : Math.floor(Math.random() * 3)+1+rand % 4;
       switch(rand){
         case 0:
           if(this.y-blockDist < 0){
@@ -103,7 +141,7 @@ class MazeBlock{
               flagCanGo = false;
               break;
           }
-          this.up = new MazeBlock(this.x, this.y-blockDist);
+          this.up = new MazeBlock(this.x, this.y-blockDist, this, this.size);
         break;
 
         case 1:
@@ -115,7 +153,7 @@ class MazeBlock{
               flagCanGo = false
               break;
           }
-          this.down = new MazeBlock(this.x, this.y+blockDist);
+          this.down = new MazeBlock(this.x, this.y+blockDist, this, this.size);
         break;
 
         case 2:
@@ -127,7 +165,7 @@ class MazeBlock{
               flagCanGo = false;
               break;
           }
-          this.left = new MazeBlock(this.x-blockDist, this.y);
+          this.left = new MazeBlock(this.x-blockDist, this.y, this, this.size);
         break;
 
         case 3:
@@ -139,7 +177,7 @@ class MazeBlock{
               flagCanGo = false;
               break;
           }
-          this.left = new MazeBlock(this.x+blockDist, this.y);
+          this.left = new MazeBlock(this.x+blockDist, this.y, this, this.size);
         break;
       }
     }
