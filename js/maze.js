@@ -93,7 +93,7 @@ class MazeBlock{
     if (cmat.getImageData(this.x, this.y-blockDist) != red && cmat.getImageData(this.x, this.y+blockDist) != red && cmat.getImageData(this.x+blockDist, this.y) != red && cmat.getImageData(this.x-blockDist, this.y) != red){
       return;
     }
-    createAux(false);
+    var rand = createAux(false);
     var divide = Math.floor(Math.random() * 2);
     if(divide == 1){
       return;
@@ -181,6 +181,7 @@ class MazeBlock{
         break;
       }
     }
+    return rand;
   }
 }
 
@@ -351,6 +352,7 @@ async function sbinalla(){
 }
 
 generateMaze();
+start.drawWalls();
 
 // Create player
 //user = new Player(300, 300);
