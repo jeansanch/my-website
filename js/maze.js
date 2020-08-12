@@ -2,6 +2,7 @@ const canvas = document.getElementById('mazeCanvas');
 const cmat = canvas.getContext('2d');
 const blockDist = 50;
 var blocksCreated = 0;
+var mazeEndDist = 0;
 class Player{
   constructor(x, y){
       this.x = x;
@@ -83,6 +84,8 @@ class MazeBlock{
     this.down = null;
     this.father = fath;
     this.size = lastSize+1;
+    if(this.size > mazeEndDist)
+      mazeEndDist = this.size;
     this.xP = (cmat.getImageData(this.x+blockDist, this.y, 1, 1).data)[0];
     this.xM = (cmat.getImageData(this.x-blockDist, this.y, 1, 1).data)[0];
     this.yP = (cmat.getImageData(this.x, this.y+blockDist, 1, 1).data)[0];
@@ -428,10 +431,35 @@ function drawWalls(point){
   }
 }
 
+function setEnd(maze){
+  //this will lead to more than 1 ending block, but I honestly don't mind :)
+  if(maze.size == mazeEndDist){
+    cmat.beginPath();
+    cmat.fillStyle = "blue";
+    cmat.fillRect(maze.x-blockDist/2+2, maze.y-blockDist/2+2, blockDist-4, blockDist-4);
+    return;
+  }
+  if(maze.right != null){
+    setEnd(maze.right)
+  }
+  if(maze.left != null){
+    setEnd(maze.left)
+  }
+  if(maze.up != null){
+    setEnd(maze.up)
+  }
+  if(maze.down != null){
+    setEnd(maze.down)
+  }
+  return;
+
+}
 
 var init = generateMaze();
 drawFirstWalls(init);
 
+console.log("Longest path is at"+mazeEndDist);
+setEnd(init);
 // Create player
 user = new Player(25, 25);
 
