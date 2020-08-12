@@ -50,7 +50,7 @@ class Player{
   }
 
   drawPlayer(){
-    //drawBase();
+    drawBase();
     cmat.fillStyle = "white"
     cmat.beginPath();
     cmat.arc(this.x, this.y, 5, 0, 2 * Math.PI);
@@ -296,9 +296,12 @@ function drawBase(){
   cmat.strokeStyle = "white";
   cmat.lineWidth = 2;
   cmat.strokeRect(0, 0, 600, 600);
+  drawFirstWalls(init);
+  drawEnd(init);
 }
 
 var debug = false;
+
 function pressionadoDebug(){
   if(debug==false){
     document.getElementById('botaoDebug').style.cssText = 'background-color: green;';
@@ -316,6 +319,7 @@ function pressionadoDebug(){
 }
 
 var spin = false;
+
 function pressionadoSpin(){
   if(spin==false){
     document.getElementById('botaoSpin').style.cssText = 'background-color: green;';
@@ -431,7 +435,7 @@ function drawWalls(point){
   }
 }
 
-function setEnd(maze){
+function drawEnd(maze){
   //this will lead to more than 1 ending block, but I honestly don't mind :)
   if(maze.size == mazeEndDist){
     cmat.beginPath();
@@ -440,16 +444,16 @@ function setEnd(maze){
     return;
   }
   if(maze.right != null){
-    setEnd(maze.right)
+    drawEnd(maze.right)
   }
   if(maze.left != null){
-    setEnd(maze.left)
+    drawEnd(maze.left)
   }
   if(maze.up != null){
-    setEnd(maze.up)
+    drawEnd(maze.up)
   }
   if(maze.down != null){
-    setEnd(maze.down)
+    drawEnd(maze.down)
   }
   return;
 
@@ -458,8 +462,8 @@ function setEnd(maze){
 var init = generateMaze();
 drawFirstWalls(init);
 
-console.log("Longest path is at"+mazeEndDist);
-setEnd(init);
+console.log("Longest path is at "+mazeEndDist);
+drawEnd(init);
 // Create player
 user = new Player(25, 25);
 
