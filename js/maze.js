@@ -522,11 +522,24 @@ function defineEnd(maze){
 }
 
 function optimizeLines(){
+  //remove repeating walls
   barriers.forEach(function (i, ind) {
     barriers.forEach(function (j, sind) {
     if(ind != sind){
       if (i.x1 == j.x1 && i.x2 == j.x2 && i.y1 == j.y1 && i.y2 == j.y2)
         barriers.splice(sind, 1);
+      }
+    });
+  });
+  //remove walls that are one after another
+  barriers.forEach(function (fir, i) {
+    barriers.forEach(function (sec, j) {
+      if(i != j){
+        if (fir.x2 == sec.x1 && fir.y2 == sec.y1 && (fir.x1 == sec.x2 || fir.y1 == sec.y2)){
+          fir.x2 = sec.x2;
+          fir.y2 = sec.y2;
+          barriers.splice(j, 1);
+        }
       }
     });
   });
@@ -553,4 +566,4 @@ user.drawPlayer();
 
 console.log("Blocks created = "+blocksCreated);
 console.log("N of walls = "+barriers.length)
-//Barrier.getWords();
+Barrier.getWords();
