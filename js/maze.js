@@ -3,6 +3,7 @@ const cmat = canvas.getContext('2d');
 const blockDist = 50;
 var blocksCreated = 0;
 var mazeEndDist = 0;
+
 class Player{
   constructor(x, y){
       this.x = x;
@@ -69,7 +70,16 @@ class Barrier{
     this.y1 = y1;
     this.x2 = x2;
     this.y2 = y2;
+    this.showValues = () =>{
+           console.log([this.x1, this.y1, this.x2, this.y2]);
+    };
   }
+
+  static getWords() {
+        barriers.forEach( x => {
+            x.showValues();
+        });
+    }
 
 }
 
@@ -332,7 +342,6 @@ function pressionadoSpin(){
   }
 }
 
-
 function sleep(ms){
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -361,10 +370,12 @@ function drawFirstWalls(point){
     cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
     cmat.lineTo(point.x+blockDist/2, point.y-blockDist/2);
     cmat.stroke();
+    barriers.push(new Barrier(point.x-blockDist/2, point.y-blockDist/2, point.x+blockDist/2, point.y-blockDist/2));
 
     cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
     cmat.lineTo(point.x-blockDist/2, point.y+blockDist/2);
     cmat.stroke();
+    barriers.push(new Barrier(point.x-blockDist/2, point.y-blockDist/2, point.x-blockDist/2, point.y+blockDist/2));
 
   if(point.down == null){
     cmat.beginPath();
@@ -372,6 +383,7 @@ function drawFirstWalls(point){
     cmat.moveTo(point.x-blockDist/2, point.y+blockDist/2);
     cmat.lineTo(point.x+blockDist/2, point.y+blockDist/2);
     cmat.stroke();
+    barriers.push(new Barrier(point.x-blockDist/2, point.y+blockDist/2, point.x+blockDist/2, point.y+blockDist/2));
   }
   else{
     drawWalls(point.down);
@@ -383,6 +395,7 @@ function drawFirstWalls(point){
     cmat.moveTo(point.x+blockDist/2, point.y-blockDist/2);
     cmat.lineTo(point.x+blockDist/2, point.y+blockDist/2);
     cmat.stroke();
+    barriers.push(new Barrier(point.x+blockDist/2, point.y-blockDist/2, point.x+blockDist/2, point.y+blockDist/2));
   }
   else{
     drawWalls(point.right);
@@ -396,6 +409,7 @@ function drawWalls(point){
     cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
     cmat.lineTo(point.x+blockDist/2, point.y-blockDist/2);
     cmat.stroke();
+    barriers.push(new Barrier(point.x-blockDist/2, point.y-blockDist/2, point.x+blockDist/2, point.y-blockDist/2));
   }
   else if (point != point.father.down){
     drawWalls(point.up);
@@ -407,6 +421,7 @@ function drawWalls(point){
     cmat.moveTo(point.x-blockDist/2, point.y+blockDist/2);
     cmat.lineTo(point.x+blockDist/2, point.y+blockDist/2);
     cmat.stroke();
+    barriers.push(new Barrier(point.x-blockDist/2, point.y+blockDist/2, point.x+blockDist/2, point.y+blockDist/2));
   }
   else if (point != point.father.up){
     drawWalls(point.down);
@@ -418,6 +433,7 @@ function drawWalls(point){
     cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
     cmat.lineTo(point.x-blockDist/2, point.y+blockDist/2);
     cmat.stroke();
+    barriers.push(new Barrier(point.x-blockDist/2, point.y-blockDist/2, point.x-blockDist/2, point.y+blockDist/2));
   }
   else if (point != point.father.right){
     drawWalls(point.left);
@@ -429,6 +445,7 @@ function drawWalls(point){
     cmat.moveTo(point.x+blockDist/2, point.y-blockDist/2);
     cmat.lineTo(point.x+blockDist/2, point.y+blockDist/2);
     cmat.stroke();
+    barriers.push(new Barrier(point.x+blockDist/2, point.y-blockDist/2, point.x+blockDist/2, point.y+blockDist/2));
   }
   else if (point != point.father.left){
     drawWalls(point.right);
@@ -460,6 +477,9 @@ function drawEnd(maze){
 }
 
 var init = generateMaze();
+var barriers = [];
+
+
 drawFirstWalls(init);
 
 console.log("Longest path is at "+mazeEndDist);
@@ -472,3 +492,4 @@ var radAngle = degrees_to_radians(user.viewAngle);
 user.drawPlayer();
 
 console.log("Blocks created = "+blocksCreated);
+//For debugging -> Barrier.getWords();
