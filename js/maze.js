@@ -80,7 +80,7 @@ class Barrier{
     this.x2 = x2;
     this.y2 = y2;
     this.showValues = () =>{
-           console.log([this.x1, this.y1, this.x2, this.y2]);
+      console.log(""+this.x1+" "+this.y1+" "+this.x2+" "+this.y2);
     };
   }
 
@@ -455,6 +455,7 @@ function drawWalls(point){
       cmat.lineTo(point.x-blockDist/2, point.y+blockDist/2);
       cmat.stroke();
     }
+
     barriers.push(new Barrier(point.x-blockDist/2, point.y-blockDist/2, point.x-blockDist/2, point.y+blockDist/2));
   }
   else if (point != point.father.right){
@@ -483,7 +484,7 @@ function drawLines(){
     cmat.moveTo(i.x1, i.y1);
     cmat.lineTo(i.x2, i.y2);
     cmat.stroke();
-    });
+  });
 }
 
 function drawEnd(){
@@ -520,12 +521,24 @@ function defineEnd(maze){
 
 }
 
+function optimizeLines(){
+  barriers.forEach(function (i, ind) {
+    barriers.forEach(function (j, sind) {
+    if(ind != sind){
+      if (i.x1 == j.x1 && i.x2 == j.x2 && i.y1 == j.y1 && i.y2 == j.y2)
+        barriers.splice(sind, 1);
+      }
+    });
+  });
+}
+
 var init = generateMaze();
 var barriers = [];
 var end = null;
 
 drawFirstWalls(init);
 
+optimizeLines();
 drawLines();
 defineEnd(init);
 drawEnd();
@@ -539,4 +552,5 @@ var radAngle = degrees_to_radians(user.viewAngle);
 user.drawPlayer();
 
 console.log("Blocks created = "+blocksCreated);
-//For debugging -> Barrier.getWords();
+console.log("N of walls = "+barriers.length)
+//Barrier.getWords();
