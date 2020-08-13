@@ -27,7 +27,7 @@ class Player{
       this.x = x;
       this.y = y;
       this.fov = 90
-      this.numRays = 320;
+      this.numRays = 100;
       this.viewAngle = 270;
   }
 
@@ -63,26 +63,25 @@ class Player{
     var timeU;
     var collided = false;
     direct = degrees_to_radians(direct);
-    y = this.y+Math.sin(direct)*100;
-    x = this.x+Math.cos(direct)*100;
-
+    y = this.y+Math.sin(direct)*500;
+    x = this.x+Math.cos(direct)*500;
     var r = new Coord(x-this.x, y-this.y)
-
     var thisX = this.x;
     var thisY = this.y;
+    var smallest = 999;
     barriers.some(function(i){
-      collided = false;
       s.x = i.x2-i.x1;
       s.y = i.y2-i.y1;
-
       timeT = (-r.y * (thisX - i.x1) + r.x * (thisY - i.y1)) / (-s.x * r.y + r.x * s.y);
       timeU = (s.x * (thisY - i.y1) - s.y * (thisX - i.x1)) / (-s.x * r.y + r.x * s.y);
 
       if(timeT >= 0 && timeT <= 1 && timeU >=0 && timeU <= 1){
+        if(Math.sqrt(((thisX + (timeU * r.x)) - thisX)**2 + ((thisY + (timeU * r.y)) - thisY)**2) < smallest){
+          smallest = Math.sqrt(((thisX + (timeU * r.x)) - thisX)**2 + ((thisY + (timeU * r.y)) - thisY)**2);
           collision.x = thisX + (timeU * r.x);
           collision.y = thisY + (timeU * r.y);
           collided = true;
-          return true;
+        }
       }
     });
 
@@ -200,8 +199,9 @@ class MazeBlock{
         }
       break;
       }
-    cmat.fillStyle = "blue";
-    cmat.fillRect(this.x-blockDist/2, this.y-blockDist/2, blockDist, blockDist);
+    //debug
+    // cmat.fillStyle = "blue";
+    // cmat.fillRect(this.x-blockDist/2, this.y-blockDist/2, blockDist, blockDist);
     this.createAux(true, rand);
     cmat.fillStyle = "black";
     cmat.fillRect(this.x-blockDist/2, this.y-blockDist/2, blockDist, blockDist);
