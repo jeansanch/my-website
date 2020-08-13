@@ -4,6 +4,15 @@ const blockDist = 50;
 var blocksCreated = 0;
 var mazeEndDist = 0;
 
+class Coord{
+
+  constructor(x, y){
+    this.x = x;
+    this.y = y;
+  }
+
+}
+
 class Ending{
 
   constructor(x, y){
@@ -18,7 +27,7 @@ class Player{
       this.x = x;
       this.y = y;
       this.fov = 90
-      this.numRays = 35;
+      this.numRays = 320;
       this.viewAngle = 270;
   }
 
@@ -48,15 +57,51 @@ class Player{
   drawRay(direct){
     var x = 0;
     var y = 0;
+    var s = new Coord(0,0);
+    var collision = new Coord(null, null);
+    var timeT;
+    var timeU;
+    var collided = false;
     direct = degrees_to_radians(direct);
     y = this.y+Math.sin(direct)*100;
     x = this.x+Math.cos(direct)*100;
-    cmat.beginPath();
-    cmat.strokeStyle = "white";
-    cmat.lineWidth = 1;
-    cmat.moveTo(this.x, this.y);
-    cmat.lineTo(x, y);
-    cmat.stroke();
+
+    var r = new Coord(x-this.x, y-this.y)
+
+    var thisX = this.x;
+    var thisY = this.y;
+    barriers.some(function(i){
+      collided = false;
+      s.x = i.x2-i.x1;
+      s.y = i.y2-i.y1;
+
+      timeT = (-r.y * (thisX - i.x1) + r.x * (thisY - i.y1)) / (-s.x * r.y + r.x * s.y);
+      timeU = (s.x * (thisY - i.y1) - s.y * (thisX - i.x1)) / (-s.x * r.y + r.x * s.y);
+
+      if(timeT >= 0 && timeT <= 1 && timeU >=0 && timeU <= 1){
+          collision.x = thisX + (timeU * r.x);
+          collision.y = thisY + (timeU * r.y);
+          collided = true;
+          return true;
+      }
+    });
+
+    if(collided == true){
+      cmat.beginPath();
+      cmat.strokeStyle = "white";
+      cmat.lineWidth = 1;
+      cmat.moveTo(this.x, this.y);
+      cmat.lineTo(collision.x, collision.y);
+      cmat.stroke();
+    }
+    else{
+      cmat.beginPath();
+      cmat.strokeStyle = "white";
+      cmat.lineWidth = 1;
+      cmat.moveTo(this.x, this.y);
+      cmat.lineTo(x, y);
+      cmat.stroke();
+    }
   }
 
   drawPlayer(){
@@ -315,7 +360,8 @@ function drawBase(){
   cmat.strokeStyle = "white";
   cmat.lineWidth = 2;
   cmat.strokeRect(0, 0, 600, 600);
-  drawLines();
+  if (debug)
+    drawLines();
   drawEnd();
   //drawFirstWalls(init);
   //drawEnd(init);
