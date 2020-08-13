@@ -4,6 +4,15 @@ const blockDist = 50;
 var blocksCreated = 0;
 var mazeEndDist = 0;
 
+class Ending{
+
+  constructor(x, y){
+    this.x = x;
+    this.y = y;
+  }
+
+}
+
 class Player{
   constructor(x, y){
       this.x = x;
@@ -65,7 +74,7 @@ class Player{
 
 class Barrier{
 
-  constructor(x1, y1, x2, y2){
+  constructor(x1, y1, x2, y2, dir){
     this.x1 = x1;
     this.y1 = y1;
     this.x2 = x2;
@@ -76,10 +85,10 @@ class Barrier{
   }
 
   static getWords() {
-        barriers.forEach( x => {
-            x.showValues();
-        });
-    }
+    barriers.forEach( x => {
+      x.showValues();
+    });
+  }
 
 }
 
@@ -306,8 +315,10 @@ function drawBase(){
   cmat.strokeStyle = "white";
   cmat.lineWidth = 2;
   cmat.strokeRect(0, 0, 600, 600);
-  drawFirstWalls(init);
-  drawEnd(init);
+  drawLines();
+  drawEnd();
+  //drawFirstWalls(init);
+  //drawEnd(init);
 }
 
 var debug = false;
@@ -365,24 +376,27 @@ async function sbinalla(){
 }
 
 function drawFirstWalls(point){
-    cmat.beginPath();
-    cmat.strokeStyle = "white";
-    cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
-    cmat.lineTo(point.x+blockDist/2, point.y-blockDist/2);
-    cmat.stroke();
+    if(debug){
+      cmat.beginPath();
+      cmat.strokeStyle = "white";
+      cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
+      cmat.lineTo(point.x+blockDist/2, point.y-blockDist/2);
+      cmat.stroke();
+      cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
+      cmat.lineTo(point.x-blockDist/2, point.y+blockDist/2);
+      cmat.stroke();
+    }
     barriers.push(new Barrier(point.x-blockDist/2, point.y-blockDist/2, point.x+blockDist/2, point.y-blockDist/2));
-
-    cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
-    cmat.lineTo(point.x-blockDist/2, point.y+blockDist/2);
-    cmat.stroke();
     barriers.push(new Barrier(point.x-blockDist/2, point.y-blockDist/2, point.x-blockDist/2, point.y+blockDist/2));
 
   if(point.down == null){
-    cmat.beginPath();
-    cmat.strokeStyle = "white";
-    cmat.moveTo(point.x-blockDist/2, point.y+blockDist/2);
-    cmat.lineTo(point.x+blockDist/2, point.y+blockDist/2);
-    cmat.stroke();
+    if(debug){
+      cmat.beginPath();
+      cmat.strokeStyle = "white";
+      cmat.moveTo(point.x-blockDist/2, point.y+blockDist/2);
+      cmat.lineTo(point.x+blockDist/2, point.y+blockDist/2);
+      cmat.stroke();
+    }
     barriers.push(new Barrier(point.x-blockDist/2, point.y+blockDist/2, point.x+blockDist/2, point.y+blockDist/2));
   }
   else{
@@ -390,11 +404,13 @@ function drawFirstWalls(point){
   }
 
   if(point.right == null){
-    cmat.beginPath();
-    cmat.strokeStyle = "white";
-    cmat.moveTo(point.x+blockDist/2, point.y-blockDist/2);
-    cmat.lineTo(point.x+blockDist/2, point.y+blockDist/2);
-    cmat.stroke();
+    if(debug){
+      cmat.beginPath();
+      cmat.strokeStyle = "white";
+      cmat.moveTo(point.x+blockDist/2, point.y-blockDist/2);
+      cmat.lineTo(point.x+blockDist/2, point.y+blockDist/2);
+      cmat.stroke();
+    }
     barriers.push(new Barrier(point.x+blockDist/2, point.y-blockDist/2, point.x+blockDist/2, point.y+blockDist/2));
   }
   else{
@@ -404,11 +420,13 @@ function drawFirstWalls(point){
 
 function drawWalls(point){
   if(point.up == null && point != point.father.down){
-    cmat.beginPath();
-    cmat.strokeStyle = "white";
-    cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
-    cmat.lineTo(point.x+blockDist/2, point.y-blockDist/2);
-    cmat.stroke();
+    if(debug){
+      cmat.beginPath();
+      cmat.strokeStyle = "white";
+      cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
+      cmat.lineTo(point.x+blockDist/2, point.y-blockDist/2);
+      cmat.stroke();
+    }
     barriers.push(new Barrier(point.x-blockDist/2, point.y-blockDist/2, point.x+blockDist/2, point.y-blockDist/2));
   }
   else if (point != point.father.down){
@@ -416,11 +434,13 @@ function drawWalls(point){
   }
 
   if(point.down == null && point != point.father.up){
-    cmat.beginPath();
-    cmat.strokeStyle = "white";
-    cmat.moveTo(point.x-blockDist/2, point.y+blockDist/2);
-    cmat.lineTo(point.x+blockDist/2, point.y+blockDist/2);
-    cmat.stroke();
+    if(debug){
+      cmat.beginPath();
+      cmat.strokeStyle = "white";
+      cmat.moveTo(point.x-blockDist/2, point.y+blockDist/2);
+      cmat.lineTo(point.x+blockDist/2, point.y+blockDist/2);
+      cmat.stroke();
+    }
     barriers.push(new Barrier(point.x-blockDist/2, point.y+blockDist/2, point.x+blockDist/2, point.y+blockDist/2));
   }
   else if (point != point.father.up){
@@ -428,11 +448,13 @@ function drawWalls(point){
   }
 
   if(point.left == null && point != point.father.right){
-    cmat.beginPath();
-    cmat.strokeStyle = "white";
-    cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
-    cmat.lineTo(point.x-blockDist/2, point.y+blockDist/2);
-    cmat.stroke();
+    if(debug){
+      cmat.beginPath();
+      cmat.strokeStyle = "white";
+      cmat.moveTo(point.x-blockDist/2, point.y-blockDist/2);
+      cmat.lineTo(point.x-blockDist/2, point.y+blockDist/2);
+      cmat.stroke();
+    }
     barriers.push(new Barrier(point.x-blockDist/2, point.y-blockDist/2, point.x-blockDist/2, point.y+blockDist/2));
   }
   else if (point != point.father.right){
@@ -440,11 +462,13 @@ function drawWalls(point){
   }
 
   if(point.right == null && point != point.father.left){
-    cmat.beginPath();
-    cmat.strokeStyle = "white";
-    cmat.moveTo(point.x+blockDist/2, point.y-blockDist/2);
-    cmat.lineTo(point.x+blockDist/2, point.y+blockDist/2);
-    cmat.stroke();
+    if(debug){
+      cmat.beginPath();
+      cmat.strokeStyle = "white";
+      cmat.moveTo(point.x+blockDist/2, point.y-blockDist/2);
+      cmat.lineTo(point.x+blockDist/2, point.y+blockDist/2);
+      cmat.stroke();
+    }
     barriers.push(new Barrier(point.x+blockDist/2, point.y-blockDist/2, point.x+blockDist/2, point.y+blockDist/2));
   }
   else if (point != point.father.left){
@@ -452,25 +476,45 @@ function drawWalls(point){
   }
 }
 
-function drawEnd(maze){
+function drawLines(){
+  cmat.beginPath();
+  barriers.forEach( i => {
+    cmat.strokeStyle = "white";
+    cmat.moveTo(i.x1, i.y1);
+    cmat.lineTo(i.x2, i.y2);
+    cmat.stroke();
+    });
+}
+
+function drawEnd(){
+  cmat.beginPath();
+  cmat.fillStyle = "blue";
+  cmat.fillRect(end.x, end.y, blockDist-4, blockDist-4);
+}
+
+function defineEnd(maze){
   //this will lead to more than 1 ending block, but I honestly don't mind :)
+  if (end != null){
+    return;
+  }
   if(maze.size == mazeEndDist){
     cmat.beginPath();
+    end = new Ending(maze.x-blockDist/2+2, maze.y-blockDist/2+2);
     cmat.fillStyle = "blue";
     cmat.fillRect(maze.x-blockDist/2+2, maze.y-blockDist/2+2, blockDist-4, blockDist-4);
     return;
   }
   if(maze.right != null){
-    drawEnd(maze.right)
+    defineEnd(maze.right)
   }
   if(maze.left != null){
-    drawEnd(maze.left)
+    defineEnd(maze.left)
   }
   if(maze.up != null){
-    drawEnd(maze.up)
+    defineEnd(maze.up)
   }
   if(maze.down != null){
-    drawEnd(maze.down)
+    defineEnd(maze.down)
   }
   return;
 
@@ -478,12 +522,15 @@ function drawEnd(maze){
 
 var init = generateMaze();
 var barriers = [];
-
+var end = null;
 
 drawFirstWalls(init);
 
+drawLines();
+defineEnd(init);
+drawEnd();
 console.log("Longest path is at "+mazeEndDist);
-drawEnd(init);
+
 // Create player
 user = new Player(25, 25);
 
