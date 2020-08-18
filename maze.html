@@ -10,6 +10,8 @@
   </head>
   <body>
     <canvas id="mazeCanvas" width="600" height="600" style="background: black;"></canvas>
+    <input type="range" id="fov" min="2" max="360" value="90">
+    <input type="range" id="nRays" min="3" max="500" value="100">
     <script src="js/maze.js"></script>
     <button type="button" onclick="pressionadoDebug()" class="apontador" id="botaoDebug">Debug</button>
     <button type="button" onclick="pressionadoSpin()" class="apontador" id="botaoSpin">Spin</button>

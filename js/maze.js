@@ -26,14 +26,9 @@ class Player{
   constructor(x, y){
       this.x = x;
       this.y = y;
-      this.fov = 90
+      this.fov = 90;
       this.numRays = 100;
       this.viewAngle = 270;
-  }
-
-  setFov(value){
-      this.fov = value;
-      this.numRays = this.fov*35/90;
   }
 
 
@@ -41,6 +36,10 @@ class Player{
     var dir = 0;
     var sum = 0;
     var min = 0;
+    if (debug){
+       this.numRays = document.getElementById("nRays").value;
+       this.fov = document.getElementById("fov").value;
+    }
     for(var i = 0; i<this.numRays; i++){
       sum = this.fov*(i/(this.numRays-1));
       min = this.fov/2;
@@ -49,7 +48,6 @@ class Player{
       if (!(isFinite(min)))
       min = 0;
       dir = -min+sum;
-      //console.log(i/numRays)
       this.drawRay(-dir-this.viewAngle);
     }
   }
@@ -110,9 +108,6 @@ class Player{
     cmat.arc(this.x, this.y, 5, 0, 2 * Math.PI);
     cmat.fill();
     this.playerRays();
-  }
-
-  arrowMove(){
   }
 }
 
@@ -372,14 +367,13 @@ var debug = false;
 function pressionadoDebug(){
   if(debug==false){
     document.getElementById('botaoDebug').style.cssText = 'background-color: green;';
-    user.setFov(360);
     debug=true;
+    run();
   }
   else{
     document.getElementById('botaoDebug').style.cssText = 'background-color: #d82424;';
-    user.setFov(90);
-    user.x = 300;
-    user.y = 300;
+    user.x = 25;
+    user.y = 25;
     user.drawPlayer();
     debug=false;
   }
@@ -595,21 +589,25 @@ var init = generateMaze();
 var barriers = [];
 var end = null;
 
+//Maze wall cardial points generation and optimization
 drawFirstWalls(init);
-
 optimizeLines();
 drawLines();
 defineEnd(init);
 drawEnd();
-console.log("Longest path is at "+mazeEndDist);
 
 // Create player
 user = new Player(25, 25);
-
 var radAngle = degrees_to_radians(user.viewAngle);
-
 user.drawPlayer();
 
+async function run(){
+  while(debug){
+    user.drawPlayer();
+    await sleep(15);
+  }
+}
+
+console.log("Longest path is at "+mazeEndDist);
 console.log("Blocks created = "+blocksCreated);
 console.log("N of walls = "+barriers.length)
-Barrier.getWords();
