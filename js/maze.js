@@ -374,8 +374,8 @@ function pressionadoDebug(){
     document.getElementById('botaoDebug').style.cssText = 'background-color: #d82424;';
     user.x = 25;
     user.y = 25;
-    user.drawPlayer();
     debug=false;
+    user.drawPlayer();
   }
 }
 
