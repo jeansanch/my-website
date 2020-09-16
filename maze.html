@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Light Maze</title>
+    <title>InvisiMaze</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width, initial-scale = 1.0">
     <link rel="stylesheet" href="css/maze.css">
@@ -9,11 +9,59 @@
     <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
   </head>
   <body>
-    <canvas id="mazeCanvas" width="600" height="600" style="background: black;"></canvas>
-    <input type="range" id="fov" min="2" max="360" value="90">
-    <input type="range" id="nRays" min="3" max="500" value="100">
-    <script src="js/maze.js"></script>
-    <button type="button" onclick="pressionadoDebug()" class="apontador" id="botaoDebug">Debug</button>
-    <button type="button" onclick="pressionadoSpin()" class="apontador" id="botaoSpin">Spin</button>
+    <nav id="nav">
+  		<input type="checkbox" id="check">
+  		<label for="check">
+  			<div class="hamb"></div><div class="hamb"></div><div class="hamb"></div>
+  		</label>
+  		<ul>
+  			<li id="first"><a href="index.html">Home Page</a></li>
+  			<li><a href="about-me.html">About Me</a></li>
+  			<li><a href="projects.html">Projects</a></li>
+  		</ul>
+  	</nav>
+  	<div class="title">
+  		<h1>InvisiMaze</h1>
+  	</div>
+    <div class="container">
+      <p>Right now the canvas has a fixed size and no collision check, I'll be
+         making it dynamic and I will be adding collision in the future!</p>
+      <p id="tip">For the full experience use something with a keyboard and mouse
+        Use WASD to move.<br>
+        If you are on a smartphone/tablet, click on debug and press anywhere on the screen</p>
+      <canvas id="mazeCanvas" width="600" height="600" style="background: black;"></canvas>
+      <input type="range" id="fov" min="2" max="360" value="90">
+      <input type="range" id="nRays" min="3" max="500" value="100">
+      <button type="button" onclick="pressionadoDebug()" class="apontador" id="botaoDebug">Debug</button>
+      <button type="button" onclick="pressionadoSpin()" class="apontador" id="botaoSpin">Spin</button>
+      <script src="js/maze.js"></script>
+    </div>
+
+    <div class="bottom">
+  		<div class="bottom_title">
+  			<h1>Contact Me</h1>
+  		</div>
+  		<div class="block">
+  			git-lab:<br><a href="https://gitlab.com/jean.sanchuki" class="link">jean.sanchuki</a><br><br>
+  			linkedin:<br><a href="https://www.linkedin.com/in/jean-sanch-f/" class="link">jean-sanch-f</a>
+  		</div>
+  		<div class="block">
+  			e-mail:<br>jean.sanchuki@gmail.com
+  		</div>
+  	</div>
+
+    <script>
+      var prevScrollpos = window.pageYOffset;
+      window.onscroll = function() {
+        var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+          document.getElementById("nav").style.top = "0";
+        }
+        else if (window.innerWidth > 858) {
+          document.getElementById("nav").style.top = "-80px";
+        }
+        prevScrollpos = currentScrollPos;
+      }
+    </script>
   </body>
 </html>
