@@ -29,7 +29,18 @@
       <p id="tip">For the full experience you need a keyboard and mouse<br>
         Use WASD to move.</p>
         <p id="tip">If you are on a smartphone/tablet, click on debug and press anywhere on the canvas. Due to the size of the canvas, the mobile version still a bit bugged.</p>
-      <canvas id="mazeCanvas" width="600" height="600" style="background: black;"></canvas>
+      <canvas id="mazeCanvas" style="background: black;"></canvas>
+      <script>
+      canv = document.getElementById('mazeCanvas');
+      if(window.innerWidth > 600){
+        canv.width = 600;
+        canv.height = 600;
+      }
+      else{
+        canv.width = screen.width;
+        canv.height = canv.width;
+      }
+      </script>
       <input type="range" id="fov" min="2" max="360" value="90">
       <input type="range" id="nRays" min="3" max="500" value="100">
       <button type="button" onclick="pressionadoDebug()" class="apontador" id="botaoDebug">Debug</button>

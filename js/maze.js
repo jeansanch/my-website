@@ -1,6 +1,6 @@
 const canvas = document.getElementById('mazeCanvas');
 const cmat = canvas.getContext('2d');
-const blockDist = 50;
+const blockDist = canvas.width/12
 var blocksCreated = 0;
 var mazeEndDist = 0;
 
@@ -194,9 +194,6 @@ class MazeBlock{
         }
       break;
       }
-    //debug
-    // cmat.fillStyle = "blue";
-    // cmat.fillRect(this.x-blockDist/2, this.y-blockDist/2, blockDist, blockDist);
     this.createAux(true, rand);
     cmat.fillStyle = "black";
     cmat.fillRect(this.x-blockDist/2, this.y-blockDist/2, blockDist, blockDist);
@@ -354,12 +351,10 @@ function drawBase(){
   cmat.clearRect(0, 0, canvas.width, canvas.height);
   cmat.strokeStyle = "white";
   cmat.lineWidth = 2;
-  cmat.strokeRect(0, 0, 600, 600);
+  cmat.strokeRect(0, 0, canvas.width, canvas.height);
   if (debug)
     drawLines();
   drawEnd();
-  //drawFirstWalls(init);
-  //drawEnd(init);
 }
 
 var debug = false;
@@ -399,7 +394,7 @@ function sleep(ms){
 
 function generateMaze(){
   cmat.fillStyle = "red";
-  cmat.fillRect(0, 0, 600, 600);
+  cmat.fillRect(0, 0, canvas.width, canvas.height);
   return new MazeBlock(25,25, null, 0);
 }
 
@@ -597,7 +592,7 @@ defineEnd(init);
 drawEnd();
 
 // Create player
-user = new Player(25, 25);
+user = new Player(blockDist/2, blockDist/2);
 var radAngle = degrees_to_radians(user.viewAngle);
 user.drawPlayer();
 
