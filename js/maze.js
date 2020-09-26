@@ -128,7 +128,6 @@ class Barrier{
       x.showValues();
     });
   }
-
 }
 
 class MazeBlock{
@@ -395,7 +394,7 @@ function sleep(ms){
 function generateMaze(){
   cmat.fillStyle = "red";
   cmat.fillRect(0, 0, canvas.width, canvas.height);
-  return new MazeBlock(25,25, null, 0);
+  return new MazeBlock(canvas.width/24,canvas.width/24, null, 0);
 }
 
 async function sbinalla(){
