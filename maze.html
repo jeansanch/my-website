@@ -42,13 +42,22 @@
         canv.height = canv.width;
       }
       </script>
-      <label for="fov">FOV</label>
-      <input type="range" id="fov" min="2" max="360" value="90">
-      <label for="nRays">Rays</label>
-      <input type="range" id="nRays" min="3" max="500" value="100">
-      <button type="button" onclick="pressionadoDebug()" class="apontador" id="botaoDebug">Debug</button>
-      <button type="button" onclick="pressionadoSpin()" class="apontador" id="botaoSpin">Spin</button>
-      <script src="js/maze.js"></script>
+      <div class="description">
+        <p>Debug must be active for the FOV and the number of rays to change</p>
+        <div class="group">
+          <label for="fov">FOV</label>
+          <input type="range" id="fov" min="2" max="360" value="90">
+        </div>
+        <div class="group">
+          <label for="nRays">Rays</label>
+          <input type="range" id="nRays" min="3" max="500" value="100">
+        </div>
+        <div class="group" id="button">
+          <button type="button" onclick="pressionadoDebug()" class="apontador" id="botaoDebug">Debug</button>
+          <button type="button" onclick="pressionadoSpin()" class="apontador" id="botaoSpin">Spin</button>
+        </div>
+        <script src="js/maze.js"></script>
+      </div>
     </div>
 
     <div class="bottom">

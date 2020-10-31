@@ -181,10 +181,19 @@ li{
 	color: green;
 }
 
+.description{
+	text-align: center;
+}
+
+.description p{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
 .container label{
+	text-align: center;
 	color: White;
 	font-family: sans-serif;
-	font-weight: bold;
 	font-size: 20px;
 }
 
@@ -197,6 +206,10 @@ button{
   text-decoration: none;
   display: inline-block;
   font-size: 18px;
+}
+
+.group{
+	display: inline;
 }
 
 @media(max-width:858px){
@@ -239,6 +252,14 @@ button{
 
 	#first{
 		margin-left: 0px;
+	}
+
+	.group{
+		display: inline-grid;
+	}
+
+	#button{
+		display: inline;
 	}
 
   .buttonlist{
