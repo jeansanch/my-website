@@ -181,6 +181,13 @@ li{
 	color: green;
 }
 
+.container label{
+	color: White;
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 20px;
+}
+
 button{
   font-size: 20px;
   padding: 7px 13px;

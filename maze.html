@@ -29,7 +29,7 @@
       <p id="tip">For the full experience you need a keyboard and mouse<br>
         Use WASD to move.</p>
         <p id="tip">If you are on a smartphone/tablet, click on debug and press anywhere on the canvas.
-          The mobile version still a bit bugged.</p>
+          The mobile version is still a bit bugged.</p>
       <canvas id="mazeCanvas" style="background: black;"></canvas>
       <script>
       canv = document.getElementById('mazeCanvas');
@@ -42,7 +42,9 @@
         canv.height = canv.width;
       }
       </script>
+      <label for="fov">FOV</label>
       <input type="range" id="fov" min="2" max="360" value="90">
+      <label for="nRays">Rays</label>
       <input type="range" id="nRays" min="3" max="500" value="100">
       <button type="button" onclick="pressionadoDebug()" class="apontador" id="botaoDebug">Debug</button>
       <button type="button" onclick="pressionadoSpin()" class="apontador" id="botaoSpin">Spin</button>
