@@ -117,10 +117,7 @@ h1{
 }
 
 .bottom{
-	padding-right: 10%;
-	padding-left: 10%;
-	padding-bottom: 100px;
-	padding-top: 50px;
+	padding: 50px 10% 100px 10%;
 	background-color: #111;
 	display: grid;
 	grid-template-columns: 50% 50%;

@@ -118,11 +118,8 @@ nav label, nav input{
 .title{
 	background: #111;
 	border-bottom: 5px solid white;
-	padding-top: 130px;
-	padding-left: 14%;
-	padding-right: 14%;
+	padding: 130px 14% 50px 14%;
 	text-align: center;
-	padding-bottom: 50px;
 }
 
 div input:hover{
@@ -163,17 +160,13 @@ li{
 
 .bottom{
 	border-top: 5px solid white;
-	padding-right: 10%;
-	padding-left: 10%;
-	padding-bottom: 100px;
-	padding-top: 50px;
+	padding: 50px 10% 100px 10%;
 	background-color: #111;
 	display: grid;
 	grid-template-columns: 50% 50%;
 	grid-template-rows: 80px;
 	grid-gap: 20px;
 	color: white;
-	font-weight: bold;
 }
 
 .bottom_title{

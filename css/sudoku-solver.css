@@ -117,11 +117,8 @@ nav label, nav input{
 .title{
 	background: rgb(220,220,220);
 	border-bottom: 5px solid rgb(3, 120, 252);
-	padding-top: 130px;
-	padding-left: 14%;
-	padding-right: 14%;
+	padding: 130px 14% 50px 14%;
 	text-align: center;
-	padding-bottom: 50px;
 }
 
 h1{
@@ -224,10 +221,7 @@ li{
 
 .bottom{
 	border-top: 5px solid rgb(3, 120, 252);
-	padding-right: 10%;
-	padding-left: 10%;
-	padding-bottom: 100px;
-	padding-top: 50px;
+	padding: 50px 10% 100px 10%;
 	background-color: rgb(220,220,220);
 	display: grid;
 	grid-template-columns: 50% 50%;
@@ -249,7 +243,7 @@ li{
 	color: green;
 }
 
-.buttonlist{
+.button_list{
 	margin-left: -35px;
 }
 
@@ -274,12 +268,9 @@ li{
 }
 
 #tip{
-	padding-bottom: 65px;
-	padding-top: 75px;
-	padding-right: 15px;
+	padding: 75px 15px 65px 15px;
 	width: 24vw;
 	margin-left: -50px;
-	padding-left: 15px;
 }
 
 @media(max-width:858px){

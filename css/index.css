@@ -239,11 +239,8 @@ h2{
 
 .knowledge{
 	background: #222;
-	padding-top: 50px;
-	padding-left: 14%;
-	padding-right: 14%;
+	padding: 50px 14% 48px 14%;
 	text-align: center;
-	padding-bottom: 48px;
 }
 
 .k_column{
@@ -355,10 +352,7 @@ h2{
 
 
 .bottom{
-	padding-right: 10%;
-	padding-left: 10%;
-	padding-bottom: 100px;
-	padding-top: 50px;
+	padding: 50px 10% 100px 10%;
 	background-color: #111;
 	display: grid;
 	grid-template-columns: 50% 50%;
