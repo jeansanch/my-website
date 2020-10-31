@@ -285,11 +285,13 @@ window.onkeydown = function(kb){
   }
 
   if (Keys.up) {
+    radAngle = degrees_to_radians(user.viewAngle);
     user.y -= Math.sin(radAngle)*5;
     user.x += Math.cos(radAngle)*5;
     user.drawPlayer();
   }
   else if (Keys.down){
+    radAngle = degrees_to_radians(user.viewAngle);
     user.y += Math.sin(radAngle)*5;
     user.x -= Math.cos(radAngle)*5;
     user.drawPlayer();
@@ -368,6 +370,9 @@ function pressionadoDebug(){
     document.getElementById('botaoDebug').style.cssText = 'background-color: #d82424;';
     user.x = 25;
     user.y = 25;
+    user.fov = 90;
+    user.numRays = 100;
+    user.viewAngle = 270
     debug=false;
     user.drawPlayer();
   }
