@@ -24,12 +24,9 @@
   		<h1>InvisiMaze</h1>
   	</div>
     <div class="container">
-      <p>Right now the canvas has a fixed size and no collision check, I'll be
-         making it dynamic and I will be adding collision in the future!</p>
-      <p id="tip">For the full experience you need a keyboard and mouse<br>
-        Use WASD to move.</p>
-        <p id="tip">If you are on a smartphone/tablet, click on debug and press anywhere on the canvas.
-          The mobile version is still a bit bugged.</p>
+      <p id="tip">For the full experience you need a keyboard and mouse.<br>
+        Use arrows to move.</p>
+        <p id="tip">If you are on a smartphone/tablet, click on debug and press anywhere on the canvas.</p>
       <canvas id="mazeCanvas" style="background: black;"></canvas>
       <script>
       canv = document.getElementById('mazeCanvas');
@@ -43,7 +40,8 @@
       }
       </script>
       <div class="description">
-        <p>Debug must be active for the FOV and the number of rays to change</p>
+        <p>Debug must be active for the FOV and the number of rays to change.</p>
+        <p>While debug is active you can also use WASD to directly move on the X and Y axis.</p>
         <div class="group">
           <label for="fov">FOV</label>
           <input type="range" id="fov" min="2" max="360" value="90">
