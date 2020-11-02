@@ -269,19 +269,46 @@ var Keys = {
 };
 
 window.onkeydown = function(kb){
-  console.log("A key was pressed")
+  console.log("A key was pressed");
   var kc = kb.keyCode;
   kb.preventDefault();
 
-  if      (kc === 37) Keys.left = true;
-  else if (kc === 38) Keys.up = true;
-  else if (kc === 39) Keys.right = true;
-  else if (kc === 40) Keys.down = true;
-  else if (debug){
-    if (kc === 87) Keys.w = true;
-    else if (kc === 65) Keys.a = true;
-    else if (kc === 83) Keys.s = true;
-    else if (kc === 68) Keys.d = true;
+
+  switch(kc){
+    case 37:
+      Keys.left = true;
+    break;
+
+    case 38:
+      Keys.up = true;
+    break;
+
+    case 39:
+      Keys.right = true;
+    break;
+
+    case 40:
+      Keys.down = true;
+    break;
+  }
+  if (debug){
+    switch(kc){
+      case 87:
+        Keys.w = true;
+      break;
+
+      case 65:
+        Keys.a = true;
+      break;
+
+      case 83:
+        Keys.s = true;
+      break;
+
+      case 68:
+        Keys.d = true;
+      break;
+    }
   }
 
   if (Keys.up) {
@@ -311,11 +338,11 @@ window.onkeydown = function(kb){
   }
   if (debug){
     if (Keys.w){
-      user.y+=5;
+      user.y-=5;
       user.drawPlayer();
     }
     else if (Keys.s){
-      user.y-=5;
+      user.y+=5;
       user.drawPlayer();
     }
     else if (Keys.a){
@@ -333,14 +360,42 @@ window.onkeyup = function(kb) {
   var kc = kb.keyCode;
   kb.preventDefault();
 
-  if      (kc === 37) Keys.left = false;
-  else if (kc === 38) Keys.up = false;
-  else if (kc === 39) Keys.right = false;
-  else if (kc === 40) Keys.down = false;
-  else if (kc === 87) Keys.w = false;
-  else if (kc === 65) Keys.a = false;
-  else if (kc === 83) Keys.s = false;
-  else if (kc === 68) Keys.d = false;
+  switch(kc){
+    case 37:
+      Keys.left = false;
+    break;
+
+    case 38:
+      Keys.up = false;
+    break;
+
+    case 39:
+      Keys.right = false;
+    break;
+
+    case 40:
+      Keys.down = false;
+    break;
+  }
+  if (debug){
+    switch(kc){
+      case 87:
+        Keys.w = false;
+      break;
+
+      case 65:
+        Keys.a = false;
+      break;
+
+      case 83:
+        Keys.s = false;
+      break;
+
+      case 68:
+        Keys.d = false;
+      break;
+    }
+  }
 };
 
 function degrees_to_radians(degrees){
@@ -582,6 +637,10 @@ function optimizeLines(){
       }
     });
   });
+}
+
+function collision(){
+
 }
 
 var init = generateMaze();
