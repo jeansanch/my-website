@@ -313,13 +313,17 @@ window.onkeydown = function(kb){
 
   if (Keys.up) {
     radAngle = degrees_to_radians(user.viewAngle);
-    user.y -= Math.sin(radAngle)*5;
-    user.x += Math.cos(radAngle)*5;
+    if (collision(-(Math.sin(radAngle)*5), Math.cos(radAngle)*5) == false){
+      user.y -= Math.sin(radAngle)*5;
+      user.x += Math.cos(radAngle)*5;
+    }
   }
   else if (Keys.down){
     radAngle = degrees_to_radians(user.viewAngle);
-    user.y += Math.sin(radAngle)*5;
-    user.x -= Math.cos(radAngle)*5;
+    if (collision(Math.sin(radAngle)*5, -(Math.cos(radAngle)*5)) == false){
+      user.y += Math.sin(radAngle)*5;
+      user.x -= Math.cos(radAngle)*5;
+    }
   }
 
   if (Keys.left){
@@ -632,8 +636,21 @@ function optimizeLines(){
   });
 }
 
-function collision(){
+function collision(posy, posx){
+  var collision = false;
+  var s = new Coord(0,0);
 
+  barriers.some(function(i){
+    s.x = i.x2-i.x1;
+    s.y = i.y2-i.y1;
+    timeT = (-posy * (user.x - i.x1) + posx * (user.y - i.y1)) / (-s.x * posy + posx * s.y);
+    timeU = (s.x * (user.y - i.y1) - s.y * (user.x - i.x1)) / (-s.x * posy + posx * s.y);
+
+    if(timeT >= 0 && timeT <= 1 && timeU >=0 && timeU <= 1){
+        collision = true;
+    }
+  });
+  return collision;
 }
 
 var init = generateMaze();
