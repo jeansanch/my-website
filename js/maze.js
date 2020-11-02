@@ -315,45 +315,38 @@ window.onkeydown = function(kb){
     radAngle = degrees_to_radians(user.viewAngle);
     user.y -= Math.sin(radAngle)*5;
     user.x += Math.cos(radAngle)*5;
-    user.drawPlayer();
   }
   else if (Keys.down){
     radAngle = degrees_to_radians(user.viewAngle);
     user.y += Math.sin(radAngle)*5;
     user.x -= Math.cos(radAngle)*5;
-    user.drawPlayer();
   }
 
   if (Keys.left){
     user.viewAngle+=15;
     user.viewAngle = user.viewAngle % 360;
     radAngle = degrees_to_radians(user.viewAngle);
-    user.drawPlayer();
   }
   else if (Keys.right){
     user.viewAngle-=15;
     user.viewAngle = user.viewAngle % 360;
     radAngle = degrees_to_radians(user.viewAngle);
-    user.drawPlayer();
   }
   if (debug){
     if (Keys.w){
       user.y-=5;
-      user.drawPlayer();
     }
     else if (Keys.s){
       user.y+=5;
-      user.drawPlayer();
     }
     else if (Keys.a){
       user.x-=5;
-      user.drawPlayer();
     }
     else if (Keys.d){
       user.x+=5;
-      user.drawPlayer();
     }
   }
+  user.drawPlayer();
 };
 
 window.onkeyup = function(kb) {
