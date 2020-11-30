@@ -29,7 +29,6 @@
 		<div class="bg-index">
 			<div class="centered">Jean C.<br>Sanchuki F.<br>
 				<p class="description" id="idade"></p><p style="color:red; font-size: 25px;">
-					<!-- This website is not finished yet! (Not 100% responsive)</span><span style="color:yellow;font-size: 25px;"> You may find a lot of bugs/glitches!</p> -->
 			</div>
 		</div>
 	</div>
@@ -47,7 +46,7 @@
 				Learned HTML, CSS and	a little bit of PHP.
 			</a>
 			<a class="exp_text right" style="top: 997px;">
-				(Feb 2018 > Jul 2021)<br>
+				(Feb 2018 > Jul 2022)<br>
 				Universidade Federal do Paraná<br>
 				Computer Science
 			</a>
@@ -207,16 +206,13 @@
 	console.log(m);
 	switch(true){
 		case m == 10:
-			console.log("mes 10");
-			if (d >= 17)
+			if (d <= 17)
 				y = y - 1;
 			break;
 		case m < 10:
-			console.log("mes< 10");
 			y = y - 1;
 			break;
 		case m > 10:
-			console.log("wtf");
 			break;
 	}
 	document.getElementById("idade").innerHTML = "Programmer, "+y+" years old, love to solve problems.";
