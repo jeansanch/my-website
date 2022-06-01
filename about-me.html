@@ -8,26 +8,22 @@
 	<link rel="stylesheet" href="css/about-me.css">
 	<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+		   $('#navlink').load("templates/navbar.html");
+		   $('#footlink').load("templates/footer.html");
+		});
+	</script>
 </head>
 
 
 
 <body>
-	<nav>
-		<input type="checkbox" id="check">
-		<label for="check">
-			<div class="hamb"></div><div class="hamb"></div><div class="hamb"></div>
-		</label>
-		<ul>
-			<li id="first"><a href="index.html">Home Page</a></li>
-			<li><a href="#">About Me</a></li>
-			<li><a href="projects.html">Projects</a></li>
-		</ul>
-	</nav>
-
+	<div id="navlink"></div>
 	<div class="main">
 		<h1>About Me</h1>
-  </div>
+  	</div>
 
 	<div class="grid-container">
 	  <div class="item">
@@ -59,16 +55,6 @@
 				Those things are amazing!</p>
 		</div>
 	</div>
-	<div class="bottom">
-		<div class="bottom_title">
-			<h1>Contact Me</h1>
-		</div>
-		<div class="block">
-			git-lab:<br><a href="https://gitlab.com/jean.sanchuki" class="link">jean.sanchuki</a><br><br>
-		</div>
-		<div class="block">
-			linkedin:<br><a href="https://www.linkedin.com/in/jean-sanch-f/" class="link">jean-sanch-f</a>
-		</div>
-	</div>
+	<div id="footlink"></div>
 </body>
 </html>
