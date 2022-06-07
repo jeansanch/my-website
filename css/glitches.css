@@ -155,6 +155,23 @@ p{
 	color: green;
 }
 
+.grid-container{
+	display: grid;
+	grid-template-areas:
+	'header header'
+	'image text';
+	gap: 5px;
+	background-color: #000000;
+	padding: 5px;
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
+.title{ grid-area: header;
+text-align: center;}
+.text{ grid-area: text;}
+.image{ grid-area: image;}
+
 @media(max-width:858px){
 
   ul{
