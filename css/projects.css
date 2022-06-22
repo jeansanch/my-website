@@ -114,6 +114,7 @@ h1{
 
 .projects{
 	padding-top: 80px;
+	padding-bottom: 15px;
 }
 
 .bottom{
@@ -138,44 +139,40 @@ h1{
 	color: green;
 }
 
-
-/* Center website */
 .main {
   max-width: 1000px;
   margin: auto;
 }
 
 .row {
-  padding: 15px;
+	margin-left: 0!important;
+	margin-right: 0!important;
 }
 
-/* Add padding BETWEEN each column (if you want) */
-.row,
-.row > .column {
-	padding: 1%;
-}
-
-/* Create four equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 23%;
-}
-
-/* Clear floats after rows */
 .row:after {
   content: "";
   display: table;
   clear: both;
 }
 
-/* Content */
+.col{
+	padding-top: 15px;
+}
+
 .content {
-  padding: 10px;
+  	padding: 10px;
 	color:white;
-  background: #111;
+ 	background: #111;
 	border: 2px solid #555;
 	border-radius: 5px;
-  text-align: center;
+  	text-align: center;
+  	height: 400px;
+	align-items: center;
+	display: grid;
+}
+
+.image-box{
+	max-height: 18vw;
 }
 
 h3{
