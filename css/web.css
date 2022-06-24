@@ -84,7 +84,7 @@ nav ul li a{
 	border: 2px solid white;
 }
 
-nav ul li a:hover {
+nav ul li a:hover, .active {
 	background: #eee;
 	color: black;
 	transition: .25s;
@@ -138,6 +138,7 @@ p{
 	grid-template-rows: 80px;
 	grid-gap: 20px;
 	color: white;
+	margin-left: 250px;
 }
 
 .bottom_title{

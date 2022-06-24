@@ -17,6 +17,7 @@
 		   $('#footlink').load("templates/footer.html");
 		});
 	</script>
+	
 </head>
 <body>
 	<div id="navlink"></div>
@@ -25,29 +26,48 @@
 			<h2 id="title">Projetos de<br/>Desenvolvimento Web <br/>(CI1010)<br/></h2>
 	    	<ul class="nav flex-column">
 				<li class="nav-item">
-					<a class="nav-link active" href="#">Página Inicial</a>
+					<a id="main" class="nav-link active" href="#">Página Inicial</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">T1 Bootstrap</a>
+					<a id="bootstrap" class="nav-link" href="#">T1 Bootstrap</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link disabled" href="#">T2</a>
+					<a id="missing" class="nav-link disabled" href="#">T2</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link disabled" href="#">T3</a>
+					<a id="missing" class="nav-link disabled" href="#">T3</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link disabled" href="#">T4</a>
+					<a id="missing" class="nav-link disabled" href="#">T4</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link disabled" href="#">T5</a>
+					<a id="missing" class="nav-link disabled" href="#">T5</a>
 				</li>
 			</ul>
 	    </nav>
 	</div>
-	<object id="frame" data="temp/About.html" width="100%" height="100%" type="text/html" style="">
+	<object id="frame" data="webProjects/bootstrap.html" width="100%" height="1000px" type="text/html" style="">
 
 	</object>
     <div id="footlink"></div>
+	<script>
+		function changeObject(id){
+			let obj = document.getElementById("frame");
+			let value = "webProjects/"+id+".html";
+			obj.data = value;
+		}
+
+		var btns = document.getElementsByClassName("nav-link");
+		console.log(btns);
+		for (var i = 0; i < btns.length; i++) {
+		  btns[i].addEventListener("click", function() {
+			var current = document.getElementsByClassName("active");
+			current[0].className = current[0].className.replace(" active", "");
+			this.className += " active";
+			current = document.getElementsByClassName("active");
+			changeObject(current[0].id)
+		  });
+		}
+	</script>
 </body>
 </html> 
