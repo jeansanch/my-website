@@ -58,7 +58,7 @@ body{
 }
 
 nav{
-	background-color: rgba(10,10,10,0.99);
+	background-color: #111;
 	width: 100%;
 	position: fixed;
 	z-index: 10;
@@ -127,7 +127,8 @@ p{
 #title{
 	font-size: 20px;
 	text-align: center;
-	padding-bottom: 10px;
+	padding-top: 11px;
+	padding-bottom: 30px;
 }
 
 .bottom{
@@ -163,7 +164,7 @@ p{
 	margin-top: 80px;
 	min-width: 250px;
    	max-width: 250px;
-   	background: #101010;
+   	background: #111;
    	color: #fff;
 	height: 100%;
 }
@@ -177,8 +178,13 @@ nav#sidebar ul li{
 	line-height: 20px;
 }
 
+.nav-item{
+	margin: 1px 5px;
+}
+
 #frame{
 	padding-left: 250px;
+	margin-top: 81px;
 }
 
 @media(max-width:858px){

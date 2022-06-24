@@ -46,14 +46,12 @@
 			</ul>
 	    </nav>
 	</div>
-	<object id="frame" data="webProjects/bootstrap.html" width="100%" height="1000px" type="text/html" style="">
-
-	</object>
+	<object id="frame" data="webProjects/bootstrap/bootstrap.html" width="100%" height="1000px" type="text/html" style=""></object>
     <div id="footlink"></div>
 	<script>
 		function changeObject(id){
 			let obj = document.getElementById("frame");
-			let value = "webProjects/"+id+".html";
+			let value = "webProjects/"+id+"/"+id+".html";
 			obj.data = value;
 		}
 
