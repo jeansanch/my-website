@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>linhas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <link rel="stylesheet" href="linhas.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <canvas id="mazeCanvas" style="background: black;"></canvas>
+      <script>
+      canv = document.getElementById('mazeCanvas');
+      if(window.innerWidth > 600){
+        canv.width = 400;
+        canv.height = 400;
+      }
+      else{
+        canv.width = screen.width*0.95;
+        canv.height = canv.width;
+      }
+      </script>
+      <script src="linhas.js"></script>
+  </body> 
+</html>
