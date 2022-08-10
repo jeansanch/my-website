@@ -10,15 +10,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
-    <canvas id="mazeCanvas" style="background: black;"></canvas>
-      <script>
+    <div class="title">
+  		<h1>Retas</h1>
+  	</div>
+    <div class="container">
+      <p id="tip"></p>
+    <canvas id="mazeCanvas" style="background: black; margin: 10px;"></canvas>
+    <script>
       canv = document.getElementById('mazeCanvas');
       canv.width = 400;
       canv.height = 400;
-      </script>
-      <script src="linhas.js"></script>
-      <input type="range" id="geometry" value="3" min="3" max="8" oninput="this.nextElementSibling.value = this.value">
-      <output>3</output>
-      <button type="button" onclick="createGeometry()">Gerar Forma</button>
+    </script>
+    <script src="linhas.js"></script>
+    <div class="description">
+      <div class="group">
+        <input type="range" id="geometry" value="3" min="3" max="8" oninput="this.nextElementSibling.value = this.value">
+        <output>3</output>
+      </div>
+      <div class="group">
+        <button type="button" onclick="createGeometry()">Gerar Forma</button>
+      </div>
+    </div>
   </body> 
 </html>
