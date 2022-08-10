@@ -146,7 +146,6 @@ activeLine = false;
 pointx = NaN;
 pointy = NaN;
 flagPoint = false;
-
 smallLine = 0;
 
 startMouse = {
@@ -261,7 +260,6 @@ function getPos(val, sides){
         min = 0;
         dir = -min+sum;
         value = -dir;
-
         direct = degrees_to_radians(value);
         y = 200+Math.sin(direct)*100;
         x = 200+Math.cos(direct)*100;
