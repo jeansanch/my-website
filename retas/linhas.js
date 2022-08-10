@@ -27,29 +27,31 @@ class Line{
         cmat.stroke();
     }
 
-    drawClosest(x, y){
-        redraw();
-        this.closestLine(x,y);
-        this.closestPoint(x,y);        
-       
-    }
-
     closestPoint(x, y, get){
+        redraw();
         var point = Math.pow(x-this.x, 2)+Math.pow(y-this.y, 2);
         var point2 = Math.pow(x-this.xi, 2)+Math.pow(y-this.yi, 2);
         if (point < point2){
             if(get)
-                return point;
+                return{
+                    dist: point,
+                    x: this.x,
+                    y: this.y};
             drawCircle(this.x, this.y, true);
         }
         else{
             if(get)
-                return point2;
+                return{
+                    dist: point2,
+                    x: this.xi,
+                    y: this.yi};
             drawCircle(this.xi, this.yi, true);
         }
     }
 
-    closestLine(x, y){
+    closestLine(){
+        redraw();
+        let flag = false;
         var offset = 0;
         var dxc = mouse.x - this.x;
         var dyc = mouse.y - this.y;
@@ -64,7 +66,19 @@ class Line{
         if(dyc >= -offset && dyc <= offset)
             dyc = 0
         var cross = dxc * dyl - dyc * dxl;
-        if(cross == 0){
+        if(Math.abs(dxl) >= Math.abs(dyl)){
+            if (dxl > 0)
+                flag = (this.x <= mouse.x && mouse.x <= this.xi)
+            else
+                flag = (this.xi <= mouse.x && mouse.x <= this.x)
+        }
+        else{
+            if (dyl > 0)
+                flag = (this.y <= mouse.y && mouse.y <= this.yi)
+            else
+                flag = (this.yi <= mouse.y && mouse.y <= this.y)
+        }
+        if(Math.abs(cross) < 101 && flag == true){
             cmat.beginPath();
             cmat.strokeStyle = "green";
             cmat.moveTo(this.x, this.y);
@@ -72,7 +86,30 @@ class Line{
             cmat.stroke();
 
             drawCircle(mouse.x, mouse.y);
+            return true;
         }
+    }
+
+    movePoint(x, y){
+        if(x == this.x && y == this.y || flagPoint == true){
+            flagPoint = true;
+            this.x = mouse.x;
+            this.y = mouse.y;
+        }
+        else{
+            flagPoint = false;
+            this.xi = mouse.x;
+            this.yi = mouse.y;
+        }
+    }
+
+    moveLine(){
+        var diffx = (mouse.x - startMouse.x)
+        var diffy = (mouse.y - startMouse.y)
+        this.x = old.x + diffx;
+        this.y = old.y + diffy;
+        this.xi = old.xi + diffx;
+        this.yi = old.yi + diffy;
     }
 }
 
@@ -99,38 +136,78 @@ function getMousePos(canvas, evt){
 }
 
 small = -1;
+activeSide = false;
+activeLine = false;
+pointx = NaN;
+pointy = NaN;
+flagPoint = false;
+startMouse = {
+    x:0,
+    y:0
+}
+
+old = {
+    x:0,
+    y:0
+}
 
 canvas.addEventListener('mousemove', function(evt){
     var mousePos = getMousePos(canvas, evt);
     mouse.x = mousePos.x;
     mouse.y = mousePos.y;
-    smaller = Infinity;
+    smaller = 99999999;
     count = 0;
-    lines.forEach(i => {
-        value = i.closestPoint(mouse.x, mouse.y, true)
-        if(value < smaller)
-            smaller = value;
-            small = count;
-        count+=1;
-    })
-    lines[small].drawClosest(mouse.x, mouse.y);
-
-    
+    redraw();
+    if(!clicked){
+        activeLine = false;
+        lines.forEach(i => {
+            value = i.closestPoint(mouse.x, mouse.y, true)
+            if(value.dist < smaller){
+                smaller = value.dist;
+                small = count;
+                pointx = value.x;
+                pointy = value.y;
+            }
+            count+=1;
+        })
+        activeLine = lines[small].closestLine();
+        if (smaller < 11){
+            activeSide = true;
+            lines[small].closestPoint(mouse.x, mouse.y);
+        }
+        else
+            activeSide = false;
+    }
+    else{
+        if(activeSide)
+            lines[small].movePoint(pointx, pointy);
+        else{
+            lines[small].moveLine();
+        }
+    }
 }, false);
 
 canvas.addEventListener('contextmenu', function(evt){
-    console.log("right")
+    //CORTAR LINHA AO MEIO
 }, false);
 
-    //CORTAR LINHA AO MEIO
 clicked = false;
 
 canvas.addEventListener('click', function(evt){
-    console.log("click")
-    clicked = !clicked;
-    lines[small].drawClosest(mouse.x, mouse.y);
-
-    //MOVER LINHA
+    if(activeSide == true){
+        clicked = !clicked;
+        flagPoint = false;
+        lines[small].closestPoint(mouse.x, mouse.y);
+    }
+    if(activeLine == true){
+        clicked = !clicked;
+        old.x = lines[small].x;
+        old.xi = lines[small].xi;
+        old.y = lines[small].y;
+        old.yi = lines[small].yi;
+        startMouse.x = mouse.x;
+        startMouse.y = mouse.y;
+    }
 }, false)
 
 function init(){
