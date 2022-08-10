@@ -78,7 +78,7 @@ class Line{
             else
                 flag = (this.yi <= mouse.y && mouse.y <= this.y)
         }
-        if(Math.abs(cross) < 101 && flag == true){
+        if(Math.abs(cross) < 301 && flag == true){
             cmat.beginPath();
             cmat.strokeStyle = "green";
             cmat.moveTo(this.x, this.y);
@@ -110,6 +110,11 @@ class Line{
         this.y = old.y + diffy;
         this.xi = old.xi + diffx;
         this.yi = old.yi + diffy;
+    }
+
+    cutLine(){
+        lines.push(new Line(this.x, this.y, mouse.x, mouse.y));
+        lines.push(new Line(this.xi, this.yi, mouse.x, mouse.y));
     }
 }
 
@@ -155,7 +160,7 @@ canvas.addEventListener('mousemove', function(evt){
     var mousePos = getMousePos(canvas, evt);
     mouse.x = mousePos.x;
     mouse.y = mousePos.y;
-    smaller = 99999999;
+    smaller = Infinity;
     count = 0;
     redraw();
     if(!clicked){
@@ -188,7 +193,8 @@ canvas.addEventListener('mousemove', function(evt){
 }, false);
 
 canvas.addEventListener('contextmenu', function(evt){
-    //CORTAR LINHA AO MEIO
+    if(activeLine == true)
+        lines[small].cutLine();
 }, false);
 
 clicked = false;
@@ -199,7 +205,7 @@ canvas.addEventListener('click', function(evt){
         flagPoint = false;
         lines[small].closestPoint(mouse.x, mouse.y);
     }
-    if(activeLine == true){
+    else if(activeLine == true){
         clicked = !clicked;
         old.x = lines[small].x;
         old.xi = lines[small].xi;
