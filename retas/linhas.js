@@ -78,7 +78,7 @@ class Line{
             else
                 flag = (this.yi <= mouse.y && mouse.y <= this.y)
         }
-        if(Math.abs(cross) < 301 && flag == true){
+        if(Math.abs(cross) < 201 && flag == true){
             cmat.beginPath();
             cmat.strokeStyle = "green";
             cmat.moveTo(this.x, this.y);
@@ -146,6 +146,9 @@ activeLine = false;
 pointx = NaN;
 pointy = NaN;
 flagPoint = false;
+
+smallLine = 0;
+
 startMouse = {
     x:0,
     y:0
@@ -166,7 +169,11 @@ canvas.addEventListener('mousemove', function(evt){
     if(!clicked){
         activeLine = false;
         lines.forEach(i => {
+            isActive = false;
             value = i.closestPoint(mouse.x, mouse.y, true)
+            isActive = i.closestLine();
+            if(isActive)
+                smallLine = count;
             if(value.dist < smaller){
                 smaller = value.dist;
                 small = count;
@@ -174,8 +181,9 @@ canvas.addEventListener('mousemove', function(evt){
                 pointy = value.y;
             }
             count+=1;
+            
         })
-        activeLine = lines[small].closestLine();
+        activeLine = lines[smallLine].closestLine();
         if (smaller < 11){
             activeSide = true;
             lines[small].closestPoint(mouse.x, mouse.y);
@@ -187,14 +195,17 @@ canvas.addEventListener('mousemove', function(evt){
         if(activeSide)
             lines[small].movePoint(pointx, pointy);
         else{
-            lines[small].moveLine();
+            lines[smallLine].moveLine();
         }
     }
 }, false);
 
 canvas.addEventListener('contextmenu', function(evt){
-    if(activeLine == true)
-        lines[small].cutLine();
+    if(activeLine == true){
+        lines[smallLine].cutLine();
+        lines.splice(smallLine, 1);
+        redraw();
+    }
 }, false);
 
 clicked = false;
@@ -207,10 +218,10 @@ canvas.addEventListener('click', function(evt){
     }
     else if(activeLine == true){
         clicked = !clicked;
-        old.x = lines[small].x;
-        old.xi = lines[small].xi;
-        old.y = lines[small].y;
-        old.yi = lines[small].yi;
+        old.x = lines[smallLine].x;
+        old.xi = lines[smallLine].xi;
+        old.y = lines[smallLine].y;
+        old.yi = lines[smallLine].yi;
         startMouse.x = mouse.x;
         startMouse.y = mouse.y;
     }
