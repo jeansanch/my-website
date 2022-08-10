@@ -233,4 +233,42 @@ function init(){
     lines[0].drawLine();
 }
 
+function createGeometry(){
+    lines = [];
+    sides = document.getElementById('geometry').value;
+    for(var i = 0; i<sides-1; i++){
+        pos1 = getPos(i, sides);
+        pos2 = getPos(i+1, sides);
+        lines.push(new Line(pos1.x, pos1.y, pos2.x, pos2.y));
+    }
+        pos1 = getPos(sides-1, sides);
+        pos2 = getPos(0, sides);
+        lines.push(new Line(pos1.x, pos1.y, pos2.x, pos2.y));
+    redraw();
+}
+
+function degrees_to_radians(degrees){
+    var pi = Math.PI;
+    return degrees * (pi/180);
+}
+
+function getPos(val, sides){
+        sum = 360*(val/(sides));
+        min = 360/2;
+        if (!(isFinite(sum)))
+        sum = 0;
+        if (!(isFinite(min)))
+        min = 0;
+        dir = -min+sum;
+        value = -dir;
+
+        direct = degrees_to_radians(value);
+        y = 200+Math.sin(direct)*100;
+        x = 200+Math.cos(direct)*100;
+        return{
+            x: x,
+            y: y
+        }
+}
+
 init()
