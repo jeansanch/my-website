@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>grade</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <link rel="stylesheet" href="grade.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <script>
+  $(document).ready(function(){
+    $.ajax({
+      type: "GET" ,
+      url: "files/alunos.xml" ,
+      dataType: "xml" ,
+      success: function(xml) {
+        $(xml).find("ALUNO").each(function(){
+          if ("GRR00000000" == $(this).find('MATR_ALUNO').text()){
+            var mat = $(this).find('NOME_ATIV_CURRIC').text();
+            var per = $(this).find('PERIODO').text();
+            mat.toUpperCase();
+            per = per.charAt(0);
+            if("Optativas" != $(this).find('DESCR_ESTRUTURA').text())
+              $("#list").append('<ul>' + mat + '</ul>');
+          }
+        }); 
+      }       
+    });
+  });
+  </script>
+  <body id="list">
+    <table style="width:100%">
+      <tr>
+        <td id="CI055">ALGORITMOS E ESTRUTURAS DE DADOS I</td>
+        <td id="CI066">OFICINA DE PROGRAMACAO</td>
+        <td id="CE003">ESTATÍSTICA II</td>
+        <td id="SIN070">ORIENTACAO BIBLIOGRAFICA B</td>
+        <td id="CI060">SEMINARIOS DE INFORMATICA I</td>
+        <td id="CI064">SOFTWARE BASICO I</td>
+        <td id="CI236">ESTAGIO SUPERVISIONADO II</td>
+        <td id="CI215">SISTEMAS OPERACIONAIS</td>
+      </tr>
+      <tr>
+        <td id="CM201">CALCULO DIFERENCIAL E INTEGRAL I</td>
+        <td id="CI056">ALGORITMOS E ESTRUTURAS DE DADOS II</td>
+        <td id="CI067">OFICINA DE COMPUTACAO</td>
+        <td id="CI219">ANALISE E PROJETOS DE SISTEMAS</td>
+        <td id="CI062">TECNICAS ALTERNATIVAS DE PROGRAMACAO</td>
+        <td id="CI069">ADMINISTRACAO DE EMPRESAS DE INFORMATICA</td>
+        <td id="CI220">TEORIA DE SISTEMAS</td>
+        <td id="CI212">ORGANIZACAO E ARQUIT DE COMPUTADORES</td>
+      </tr>
+      <tr>
+        <td id="CM045">GEOMETRIA ANALÍTICA</td>
+        <td id="CM005">ÁLGEBRA LINEAR</td>
+        <td id="CI057">ALGORITMOS E ESTRUTURAS DE DADOS III</td>
+        <td id="SC203">MATEMATICA DISCRETA</td>
+        <td id="CI057">ALGORITMOS E TEORIA DOS GRAFOS</td>
+        <td id="CI218">SISTEMAS DE BANCOS DE DADOS</td>
+        <td id="CI061">REDE DE COMPUTADORES II</td>
+        <td id="CI228">LABORATORIO DE INFORMATICA I</td>
+      </tr>
+      <tr>
+        <td id="CM046">INTRODUCAO A ALGEBRA</td>
+        <td id="CM202">CALCULO DIFERENCIAL E INTEGRAL II</td>
+        <td id="SA214">INTRODUCAO A TEORIA GERAL DA ADMINISTRACAO</td>
+        <td id="TP052">PESQUISA OPERACIONAL I</td>
+        <td id="CI235">ESTAGIO SUPERVISIONADO I</td>
+        <td id="CI214">ESTRUTURAS DE LINGUAGEMS DE PROGRAMACAO</td>
+        <td id="CI211">CONSTRUCAO DE COMPILADORES</td>
+      </tr>
+      <tr>
+        <td id="CI063">MAQUINAS PROGRAMAVEIS</td>
+        <td id="CI068">CIRCUITOS LOGICOS</td>
+        <td id="CI202">MÉTODOS NUMÉRICOS</td>
+        <td id="CI058">REDE DE COMPUTADORES I</td>
+        <td id="CI210">PROJETOS DIGITAIS E MICROPROCESSADORES</td>
+        <td id="CI221">ENGENHARIA DE SOFTWARE</td>
+        <td id="CI059">INTRODUCAO A TEORIA DA COMPUTACAO</td>
+      </tr>
+    </table>
+    <label for="fname">RA:</label>
+    <input type="text" id="fname" name="fname" default="GRR"><br><br>
+    <button id="btn">
+      Realizar busca
+    </button>
+  </body> 
+</html>
