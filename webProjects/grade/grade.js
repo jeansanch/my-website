@@ -53,8 +53,8 @@ $('td').mousedown(function(event) {
                                 flag = false;
                                 $("#description").text("");
                                 $("#description").append(code+" - "+materia);
-                                $("#description").append("</br>Última vez cursada:"+ano+"/"+periodo);
-                                $("#description").append("</br>Nota: "+nota+"</br>Frequencia:"+frequencia+"%");
+                                $("#description").append("<br/>Última vez cursada:"+ano+"/"+periodo);
+                                $("#description").append("<br/>Nota: "+nota+"<br/>Frequencia:"+frequencia+"%");
                             }
                         }
                     });
@@ -82,7 +82,7 @@ $('td').mousedown(function(event) {
                             var nota = $(this).find('MEDIA_FINAL').text();
                             var frequencia = $(this).find('FREQUENCIA').text();
                             if(code == id){
-                                $("#description").append("</br> Nota:"+nota);
+                                $("#description").append("<br/> Nota:"+nota);
                                 $("#description").append(", frequencia:"+frequencia+"%");
                                 $("#description").append(", em:"+ano+"/"+periodo);
                             }
